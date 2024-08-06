@@ -20,7 +20,7 @@ static FILE *io_open_file(char *file_name, char *mode) {
     if (!file) {
         slc_print_compiler_execuatable_name();
         IO_ERROR();
-        printf("could not open file '%s'\n", file_name);
+        printf("could not open file '%s'.\n", file_name);
         exit(1);
     }
     return file;

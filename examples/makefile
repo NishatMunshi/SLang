@@ -33,6 +33,7 @@ LD = ld
 
 # rules to run fly on an example file
 all: $(TARGET)
+	@:
 
 # link
 $(TARGET): $(OBJS)

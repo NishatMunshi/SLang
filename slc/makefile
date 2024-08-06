@@ -29,6 +29,7 @@ LD       = $(CXX)
 
 # rules to build everything
 all: release
+	@:
 
 # build with debug info
 debug: CXX_FLAGS += -DDEBUG -g

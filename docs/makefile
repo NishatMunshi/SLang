@@ -17,6 +17,7 @@ TEX       = latexmk
 TEX_FLAGS = -synctex=1 -interaction=nonstopmode -file-line-error -pdf -outdir=$(BLD_DIR)
 
 all: $(TARGET)
+	@:
 
 # compile
 $(TARGET): $(SRCS)

@@ -267,7 +267,7 @@ static void ast_verifier_verify_enter_exists(ast_verifier *verifier) {
     if (!ast_verifier_enter_exists(verifier)) {
         slc_print_compiler_execuatable_name();
         AST_VERIFIER_ERROR();
-        printf("function \"enter\" not found");
+        printf("function \"enter\" not found.\n");
         exit(1);
     }
 }
