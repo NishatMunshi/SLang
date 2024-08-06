@@ -1,0 +1,4 @@
+*
+!.gitignore
+!grammar.tex
+!makefile

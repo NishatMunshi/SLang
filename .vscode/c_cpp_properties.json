@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "compilerPath": "/usr/bin/gcc",
+            "configurationProvider": "ms-vscode.makefile-tools",
+            "intelliSenseMode": "linux-gcc-x64",
+            "cStandard": "c17"
+        }
+    ],
+    "version": 4
+}

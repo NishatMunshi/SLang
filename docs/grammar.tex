@@ -1,0 +1,113 @@
+\documentclass[12pt, a4paper]{article}
+\title{SLang: Simple Language}
+\author{Nishat Munshi}
+\date{July 2024}
+
+\usepackage{amsmath}
+\usepackage[left=2cm, right=2cm, top=0cm, bottom=2cm]{geometry}
+
+\begin{document}
+\maketitle
+
+\section*{Grammar}
+
+\begin{itemize}
+    \newcommand\boxwidth{3cm}
+    \newcommand\spacefromdefn{1cm}
+    \newcommand\spacebwops{1mm}
+
+    \item{\makebox[\boxwidth]{$\mathbf{<prog>}$\hfill}}
+    :\hspace{\spacefromdefn}
+    $<func>*$
+
+    \item{\makebox[\boxwidth]{$\mathbf{<func>}$\hfill}}
+    :\hspace{\spacefromdefn}
+    func $<ident>$ : ($<params>$) := $<scope>$
+
+    \item{\makebox[\boxwidth]{$\mathbf{<params>}$\hfill}}
+    :\hspace{\spacefromdefn}
+    $<ident>*$
+
+    \item{\makebox[\boxwidth]{$\mathbf{<scope>}$\hfill}}
+    :\hspace{\spacefromdefn}
+    \{$<stmt>*$\}
+
+    \item{\makebox[\boxwidth]{$\mathbf{<stmt>}$\hfill}}
+    :\hspace{\spacefromdefn}
+    \begin{math}
+        \begin{cases}
+            <decl> \\
+            <asst> \\
+            <cond> \\
+            <loop> \\
+            <ret>  \\
+        \end{cases}
+    \end{math}
+
+    \item{\makebox[\boxwidth]{$\mathbf{<decl>}$\hfill}}
+    :\hspace{\spacefromdefn}
+    var \hspace{\spacebwops}$<ident>\hspace{\spacebwops}\leftarrow\hspace{\spacebwops}<expr>.$
+
+    \item{\makebox[\boxwidth]{$\mathbf{<asst>}$\hfill}}
+    :\hspace{\spacefromdefn}
+    $<ident> \hspace{\spacebwops}\leftarrow\hspace{\spacebwops}<expr>.$
+
+    \item{\makebox[\boxwidth]{$\mathbf{<cond>}$\hfill}}
+    :\hspace{\spacefromdefn}
+    if \hspace{\spacebwops} $<expr> \hspace{\spacebwops}\hspace{\spacebwops}<scope>$
+
+    \item{\makebox[\boxwidth]{$\mathbf{<loop>}$\hfill}}
+    :\hspace{\spacefromdefn}
+    loop \hspace{\spacebwops} $<expr> \hspace{\spacebwops}\hspace{\spacebwops}<scope>$
+
+    \item{\makebox[\boxwidth]{$\mathbf{<ret>}$\hfill}}
+    :\hspace{\spacefromdefn}
+    ret \hspace{\spacebwops} $<expr>.$
+
+    \item{\makebox[\boxwidth]{$\mathbf{<expr>}$\hfill}}
+    :\hspace{\spacefromdefn}
+    \begin{math}
+        \begin{cases}
+            <un\_expr> \\
+            <bin\_expr>
+        \end{cases}
+    \end{math}
+
+    \item{\makebox[\boxwidth]{$\mathbf{<un\_expr>}$\hfill}}
+    :\hspace{\spacefromdefn}
+    \begin{math}
+        \begin{cases}
+            <number>      \\
+            <ident>       \\
+            <paren\_expr> \\
+            <call>
+        \end{cases}
+    \end{math}
+
+    \item{\makebox[\boxwidth]{$\mathbf{<paren\_expr>}$\hfill}}
+    :\hspace{\spacefromdefn}
+    $(<expr>)$
+
+    \item{\makebox[\boxwidth]{$\mathbf{<call>}$\hfill}}
+    :\hspace{\spacefromdefn}
+    $<ident> \hspace{\spacebwops} (<args>)$
+
+    \item{\makebox[\boxwidth]{$\mathbf{<args>}$\hfill}}
+    :\hspace{\spacefromdefn}
+    $<expr>*$
+
+    \item{\makebox[\boxwidth]{$\mathbf{<bin\_expr>}$\hfill}}
+    :\hspace{\spacefromdefn}
+    $<expr> \hspace{3mm} <bin\_op> \hspace{3mm} <un\_expr>$
+
+    \item{\makebox[\boxwidth]{$\mathbf{<bin\_op>}$\hfill}}
+    :\hspace{\spacefromdefn}
+    \begin{math}
+        \begin{cases}
+            <+> \\
+            <-> \\
+        \end{cases}
+    \end{math}
+\end{itemize}
+
+\end{document}
