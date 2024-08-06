@@ -72,11 +72,14 @@ static ast_node_func *ast_verifier_funcs_list_contains_func(list *funcs_list, st
     return NULL;
 }
 
+#define AST_VERIFIER_ERROR() printf("[AST_VERIFIER ERROR]: ")
+
 static void ast_verifier_verify_var_name_is_new(token *var_name_token, ast_verifier *verifier) {
     if (ast_verifier_vars_list_contains_var(verifier->vars_list, token_get_name(var_name_token))) {
         slc_print_compiler_execuatable_name();
         token_print_pos(var_name_token);
-        printf("[AST_VERIFIER ERROR]: variable '");
+        AST_VERIFIER_ERROR();
+        printf("variable '");
         string_view_print(token_get_name(var_name_token));
         printf("' is already defined.\n");
         exit(1);
@@ -99,7 +102,8 @@ static ast_node_var *ast_verifier_verify_var_exists(token *var_name_token, ast_v
     }
     slc_print_compiler_execuatable_name();
     token_print_pos(var_name_token);
-    printf("[AST_VERIFIER ERROR]: variable '");
+    AST_VERIFIER_ERROR();
+    printf("variable '");
     string_view_print(token_get_name(var_name_token));
     printf("' is not defined.\n");
     exit(1);
@@ -110,7 +114,8 @@ static void ast_verifier_verify_func_name_is_new(token *func_name_token, ast_ver
     if (node_func) {
         slc_print_compiler_execuatable_name();
         token_print_pos(func_name_token);
-        printf("[AST_VERIFIER ERROR]: function '");
+        AST_VERIFIER_ERROR();
+        printf("function '");
         string_view_print(token_get_name(func_name_token));
         printf("' is already defined.\n");
         exit(1);
@@ -124,7 +129,8 @@ static ast_node_func *ast_verifier_verify_func_exists(token *func_name_token, as
     }
     slc_print_compiler_execuatable_name();
     token_print_pos(func_name_token);
-    printf("[AST_VERIFIER ERROR]: function '");
+    AST_VERIFIER_ERROR();
+    printf("function '");
     string_view_print(token_get_name(func_name_token));
     printf("' is not defined.\n");
     exit(1);
@@ -136,7 +142,8 @@ static void ast_verifier_check_num_args(ast_node_call *node_call, ast_node_func 
     if (list_get_size(ast_node_func_get_params(node_func)) != list_get_size(ast_node_call_get_args(node_call))) {
         slc_print_compiler_execuatable_name();
         token_print_pos(ast_node_call_get_name(node_call));
-        printf("[AST_VERIFIER ERROR]: incorrect number of arguments in function call: ");
+        AST_VERIFIER_ERROR();
+        printf("incorrect number of arguments in function call: ");
         string_view_print(token_get_name(ast_node_call_get_name(node_call)));
         printf("\n");
         exit(1);
@@ -259,7 +266,8 @@ static void ast_verifier_verify_func(ast_node_func *node_func, ast_verifier *ver
 static void ast_verifier_verify_enter_exists(ast_verifier *verifier) {
     if (!ast_verifier_enter_exists(verifier)) {
         slc_print_compiler_execuatable_name();
-        printf("[AST_VERIFIER ERROR]: function \"enter\" not found");
+        AST_VERIFIER_ERROR();
+        printf("function \"enter\" not found");
         exit(1);
     }
 }

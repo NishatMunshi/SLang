@@ -13,11 +13,14 @@ static size_t io_get_file_size(FILE *file) {
     return size;
 }
 
+#define IO_ERROR() printf("[IO ERROR]: ")
+
 static FILE *io_open_file(char *file_name, char *mode) {
     FILE *file = fopen(file_name, mode);
     if (!file) {
         slc_print_compiler_execuatable_name();
-        printf("[IO ERROR]: could not open file '%s'\n", file_name);
+        IO_ERROR();
+        printf("could not open file '%s'\n", file_name);
         exit(1);
     }
     return file;

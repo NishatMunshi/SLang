@@ -42,6 +42,8 @@ static void parser_print_expected_token(token_type type) {
     printf("\n");
 }
 
+#define PARSER_ERROR() printf("[PARSER ERROR]: ")
+
 static token *parser_seek_token(parser *parser, token_type type) {
     token *current_token = parser_current_token(parser);
     if (!current_token) {
@@ -50,7 +52,8 @@ static token *parser_seek_token(parser *parser, token_type type) {
     if (token_get_type(current_token) != type) {
         slc_print_compiler_execuatable_name();
         token_print_pos(current_token);
-        printf("[PARSER ERROR]: unexpected token: ");
+        PARSER_ERROR();
+        printf("unexpected token: ");
         token_print(current_token);
         printf("; ");
         parser_print_expected_token(type);
@@ -84,7 +87,8 @@ static ast_node_bin_expr *parser_parse_bin_expr(ast_node_expr *node_expr_left, p
     default:
         slc_print_compiler_execuatable_name();
         token_print_pos(current_token);
-        printf("[PARSER ERROR]: Expected an operand. Instead got: ");
+        PARSER_ERROR();
+        printf("Expected an operand. Instead got: ");
         token_print(current_token);
         printf(" \n");
         exit(1);
@@ -101,7 +105,8 @@ static ast_node_bin_expr *parser_parse_bin_expr(ast_node_expr *node_expr_left, p
     default:
         slc_print_compiler_execuatable_name();
         token_print_pos(current_token);
-        printf("[PARSER ERROR]: Expected an expression. Instead got: ");
+        PARSER_ERROR();
+        printf("Expected an expression. Instead got: ");
         token_print(current_token);
         printf(" \n");
         exit(1);
@@ -154,7 +159,8 @@ static ast_node_un_expr *parser_parse_un_expr(parser *parser) {
     default:
         slc_print_compiler_execuatable_name();
         token_print_pos(current_token);
-        printf("[PARSER ERROR]: Expected an unary expression. Instead got: ");
+        PARSER_ERROR();
+        printf("Expected an unary expression. Instead got: ");
         token_print(current_token);
         printf(" \n");
         exit(1);
@@ -174,7 +180,8 @@ static ast_node_expr *parser_parse_expr(parser *parser) {
     default:
         slc_print_compiler_execuatable_name();
         token_print_pos(current_token);
-        printf("[PARSER ERROR]: Expected an expression. Instead got: ");
+        PARSER_ERROR();
+        printf("Expected an expression. Instead got: ");
         token_print(current_token);
         printf(" \n");
         exit(1);
@@ -247,7 +254,8 @@ static ast_node_stmt *parser_parse_stmt(parser *parser) {
     default:
         slc_print_compiler_execuatable_name();
         token_print_pos(current_token);
-        printf("[PARSER ERROR]: Expected a statement. Instead got: ");
+        PARSER_ERROR();
+        printf("Expected a statement. Instead got: ");
         token_print(current_token);
         printf(" \n");
         exit(1);
