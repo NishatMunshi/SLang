@@ -42,19 +42,18 @@ $(TARGET): $(OBJS)
 
 # assemble
 $(OBJ_DIR)/%.$(OBJ_EXT): $(ASS_DIR)/%.$(ASS_EXT)
-	@echo [MAKE]: assembling assembly file $<
+	@echo [MAKE]: building object file $@
 	@mkdir -p $(OBJ_DIR); $(ASS) $(ASS_FLAGS) -o $@ $<
 
 # compile
 $(ASS_DIR)/%.$(ASS_EXT): $(SRC_DIR)/%.$(SRC_EXT)
-	@echo [MAKE]: compiling SLang source file $<
+	@echo [MAKE]: building assembly file $@
 	@mkdir -p $(ASS_DIR); $(SLC) $< $@
 
 # rule to run the target
 run: $(TARGET)
 	@echo [MAKE]: running target executable $<
 	@$<
-	@echo [MAKE]: target exited with exit code
 	@echo $$?
 
 # rule to clean the temporary directories

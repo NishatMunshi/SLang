@@ -21,7 +21,7 @@ all: $(TARGET)
 
 # compile
 $(TARGET): $(SRCS)
-	@echo [MAKE]: building LaTeX source file $^ 
+	@echo [MAKE]: building pdf file $@ 
 	@mkdir -p $(BLD_DIR); $(TEX) $(TEX_FLAGS) $^ > /dev/null
 
 # rule to clean the temporary files

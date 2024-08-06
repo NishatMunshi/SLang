@@ -32,11 +32,11 @@ all: release
 	@:
 
 # build with debug info
-debug: CXX_FLAGS += -DDEBUG -g
+debug: CXX_FLAGS += -DSLC_DEBUG_BUILD -g
 debug: $(TARGET)
 
 # rule to compile the compiler
-release: CXX_FLAGS += -DRELEASE -O3
+release: CXX_FLAGS += -DSLC_RELEASE_BUILD -O3
 release: $(TARGET)
 
 # link
@@ -46,7 +46,7 @@ $(TARGET): $(OBJS)
 
 # compile
 $(OBJ_DIR)/%.$(OBJ_EXT): $(SRC_DIR)/%.$(SRC_EXT) $(HDR_DIR)/%.$(HDR_EXT)
-	@echo [MAKE]: compiling C source file $<
+	@echo [MAKE]: building object file $@
 	@mkdir -p $(OBJ_DIR); $(CXX) $(CXX_FLAGS) -o $@ -c $<
 
 # rule to clean the temporary directories
