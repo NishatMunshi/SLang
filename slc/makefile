@@ -45,7 +45,7 @@ $(TARGET): $(OBJS)
 
 # compile
 $(OBJ_DIR)/%.$(OBJ_EXT): $(SRC_DIR)/%.$(SRC_EXT) $(HDR_DIR)/%.$(HDR_EXT)
-	@echo [MAKE]: compiling source file $<
+	@echo [MAKE]: compiling C source file $<
 	@mkdir -p $(OBJ_DIR); $(CXX) $(CXX_FLAGS) -o $@ -c $<
 
 # rule to clean the temporary directories
