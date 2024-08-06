@@ -22,7 +22,7 @@ TARGET = $(EXE_DIR)/example
 .SECONDARY: $(ASSS)
 
 # compiler info
-SLC = $(shell find ../ -type f -name "slc")
+SLC = ../slc/exec/slc
 
 # assembler info
 ASS       = nasm

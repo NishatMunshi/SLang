@@ -20,12 +20,12 @@ HDRS = $(patsubst $(SRC_DIR)/%.$(SRC_EXT), $(HDR_DIR)/%.$(HDR_EXT), $(SRCS))
 TARGET = $(EXE_DIR)/slc
 
 # compiler info
-CXX           = gcc
-CXX_STD       = c17
-CXX_FLAGS     = -Wall -Wextra -Wpedantic -std=$(CXX_STD)
+CXX       = gcc
+CXX_STD   = c17
+CXX_FLAGS = -Wall -Wextra -Wpedantic -std=$(CXX_STD)
 
 # linker stuff
-LD       = $(CXX)
+LD = $(CXX)
 
 # rules to build everything
 all: release
