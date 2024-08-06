@@ -51,6 +51,5 @@ void slc_print_source_file_name() {
 }
 
 void slc_print_compiler_execuatable_name() {
-    printf("%s", slc->compiler_executable_name);
-    printf(": ");
+    printf("[SLC]: ");
 }
