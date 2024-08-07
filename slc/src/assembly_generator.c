@@ -61,7 +61,7 @@ static string *ass_gen_generate_paren_expr(ast_node_paren_expr *node_paren_expr)
 
 static string *ass_gen_generate_call(ast_node_call *node_call) {
     string *ass_call = string_create_from_cstr("");
-    list_for_each(ast_node_expr, expr, ast_node_call_get_args(node_call)) {
+    LIST_FOR_EACH(ast_node_expr, expr, ast_node_call_get_args(node_call)) {
         string *ass_expr = ass_gen_generate_expr(expr);
         string *ass_create_arg = string_create_from_cstr("    push rax\n");
         string_concat(ass_call, ass_expr);
@@ -212,7 +212,7 @@ static string *ass_gen_generate_scope(ast_node_scope *node_scope) {
     string *ass_scope = string_create_from_cstr("");
 
     list *stmts = ast_node_scope_get_stmts(node_scope);
-    list_for_each(ast_node_stmt, stmt, stmts) {
+    LIST_FOR_EACH(ast_node_stmt, stmt, stmts) {
         string_concat(ass_scope, ass_gen_generate_stmt(stmt));
     }
 
@@ -248,7 +248,7 @@ string *ass_gen_generate_prog(ast_node_prog *node_prog) {
                                                "    mov rdi, rax\n"
                                                "    mov rax, 60\n"
                                                "    syscall\n");
-    list_for_each(ast_node_func, func, ast_node_prog_get_funcs(node_prog)) {
+    LIST_FOR_EACH(ast_node_func, func, ast_node_prog_get_funcs(node_prog)) {
         string_concat(ass_prog, ass_gen_generate_func(func));
     }
 

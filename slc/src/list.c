@@ -43,7 +43,7 @@ size_t list_get_size(list *list) {
 void list_chop_after_and_including(list *list, list_node *end_node) {
     list->end = end_node;
     list->size = 0;
-    list_for_each(char , list_node, list) {
+    LIST_FOR_EACH(char , list_node, list) {
         list->size++;
         (void)list_node;
     }

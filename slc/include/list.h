@@ -16,7 +16,7 @@ list_node *list_get_end(list *list);
 void * list_get_back(list *list);
 size_t list_get_size(list *list);
 
-#define list_for_each(type, item, list_name)                            \
+#define LIST_FOR_EACH(type, item, list_name)                            \
     list_node *LIST_FOR_EACH_NODE = NULL;                               \
     type *item = NULL;                                                  \
     for (LIST_FOR_EACH_NODE = list_get_begin(list_name),                \

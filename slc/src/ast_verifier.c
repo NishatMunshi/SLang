@@ -55,7 +55,7 @@ static void ast_verifier_leave_scope(ast_verifier *verifier) {
 }
 
 static ast_node_var *ast_verifier_vars_list_contains_var(list *vars_list, string_view *var_name) {
-    list_for_each(ast_node_var, var, vars_list) {
+    LIST_FOR_EACH(ast_node_var, var, vars_list) {
         if (string_view_compare(ast_node_var_get_name(var), var_name)) {
             return var;
         }
@@ -64,7 +64,7 @@ static ast_node_var *ast_verifier_vars_list_contains_var(list *vars_list, string
 }
 
 static ast_node_func *ast_verifier_funcs_list_contains_func(list *funcs_list, string_view *func_name) {
-    list_for_each(ast_node_func, func, funcs_list) {
+    LIST_FOR_EACH(ast_node_func, func, funcs_list) {
         if (string_view_compare(token_get_name(ast_node_func_get_name_token(func)), func_name)) {
             return func;
         }
@@ -72,7 +72,7 @@ static ast_node_func *ast_verifier_funcs_list_contains_func(list *funcs_list, st
     return NULL;
 }
 
-#define AST_VERIFIER_ERROR() printf("[SLC]: [AST_VERIFIER ERROR]: ");   \
+#define AST_VERIFIER_ERROR() printf("[SLC]: [AST_VERIFIER ERROR]: ");
 
 static void ast_verifier_verify_var_name_is_new(token *var_name_token, ast_verifier *verifier) {
     if (ast_verifier_vars_list_contains_var(verifier->vars_list, token_get_name(var_name_token))) {
@@ -150,7 +150,7 @@ static void ast_verifier_verify_expr(ast_node_expr *node_expr, ast_verifier *ver
 static void ast_verifier_verify_call(ast_node_call *node_call, ast_verifier *verifier) {
     ast_node_func *node_func = ast_verifier_verify_func_exists(ast_node_call_get_name(node_call), verifier);
     ast_verifier_check_num_args(node_call, node_func);
-    list_for_each(ast_node_expr, expr, ast_node_call_get_args(node_call)) {
+    LIST_FOR_EACH(ast_node_expr, expr, ast_node_call_get_args(node_call)) {
         ast_verifier_verify_expr(expr, verifier);
     }
 }
@@ -226,7 +226,7 @@ static void ast_verifier_verify_scope(ast_node_scope *node_scope, ast_verifier *
 
     ast_verifier_enter_scope(verifier);
 
-    list_for_each(ast_node_stmt, stmt, stmts) {
+    LIST_FOR_EACH(ast_node_stmt, stmt, stmts) {
         ast_verifier_verify_stmt(stmt, verifier);
     }
     size_t num_local_vars = ast_verifier_get_num_vars(verifier) - num_vars_higher_scope;
@@ -238,7 +238,7 @@ static void ast_verifier_verify_scope(ast_node_scope *node_scope, ast_verifier *
 static void ast_verifier_verify_func_params(list *params, ast_verifier *verifier) {
     ast_verifier_reset_vars_list(verifier);
     long offset = sizeof(size_t) * (1 + list_get_size(params));
-    list_for_each(ast_node_var, var, params) {
+    LIST_FOR_EACH(ast_node_var, var, params) {
         ast_verifier_verify_var_name_is_new(ast_node_var_get_token(var), verifier);
         ast_node_var_set_offset(var, offset);
         offset -= sizeof(size_t);
@@ -269,7 +269,7 @@ static void ast_verifier_verify_enter_exists(ast_verifier *verifier) {
 void ast_verifier_verify_prog(ast_node_prog *node_prog) {
     ast_verifier *verifier = ast_verifier_create();
 
-    list_for_each(ast_node_func, func, ast_node_prog_get_funcs(node_prog)) {
+    LIST_FOR_EACH(ast_node_func, func, ast_node_prog_get_funcs(node_prog)) {
         ast_verifier_verify_func(func, verifier);
     }
 
