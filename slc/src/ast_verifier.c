@@ -1,8 +1,8 @@
 #include "../include/ast_verifier.h"
 #include "../include/arena_allocator.h"
 #include "../include/slc.h"
+#include "../include/utils.h"
 
-#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -148,7 +148,7 @@ static void ast_verifier_verify_un_expr(ast_node_un_expr *node_un_expr, ast_veri
     case AST_NODE_UN_EXPR_PAREN_EXPR: ast_verifier_verify_expr(ast_node_paren_expr_get_expr(ast_node_un_expr_get_paren_expr(node_un_expr)), verifier); break;
     case AST_NODE_UN_EXPR_CALL: ast_verifier_verify_call(ast_node_un_expr_get_call(node_un_expr), verifier); break;
 
-    default: assert(false && "unreachable\n");
+    default: UNREACHABLE;
     }
 }
 
@@ -162,7 +162,7 @@ static void ast_verifier_verify_expr(ast_node_expr *node_expr, ast_verifier *ver
     case AST_NODE_EXPR_UN_EXPR: ast_verifier_verify_un_expr(ast_node_expr_get_un_expr(node_expr), verifier); break;
     case AST_NODE_EXPR_BIN_EXPR: ast_verifier_verify_bin_expr(ast_node_expr_get_bin_expr(node_expr), verifier); break;
 
-    default: assert(false && "unreachable");
+    default: UNREACHABLE;
     }
 }
 
@@ -197,7 +197,7 @@ static void ast_verifier_verify_stmt(ast_node_stmt *node_stmt, ast_verifier *ver
     case AST_NODE_STMT_LOOP: ast_verifier_verify_loop(ast_node_stmt_get_loop(node_stmt), verifier); break;
     case AST_NODE_STMT_RET: ast_verifier_verify_expr(ast_node_ret_get_expr(ast_node_stmt_get_ret(node_stmt)), verifier); break;
 
-    default: assert(false && "unreachable");
+    default: UNREACHABLE;
     }
 }
 

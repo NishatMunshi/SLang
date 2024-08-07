@@ -1,8 +1,8 @@
 #include "../include/token.h"
 #include "../include/arena_allocator.h"
 #include "../include/slc.h"
+#include "../include/utils.h"
 
-#include <assert.h>
 #include <stdio.h>
 
 struct token_struct {
@@ -68,7 +68,7 @@ char * token_get_type_as_string(token_type type) {
     case TOKEN_UNIDENTIFIED: return "<TOKEN_UNIDENTIFIED>"; break;
     case TOKEN_EOF: return "<TOKEN_EOF>"; break;
 
-    default: assert(false && "unreachable");
+    default: UNREACHABLE;
     }
 }
 

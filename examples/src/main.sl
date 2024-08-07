@@ -6,6 +6,6 @@ func fibonacci : (n) := {
     } ret 0.
 }
 
-func enteqr : () := {
+func enter : () := {
     ret fibonacci(8).
 }
