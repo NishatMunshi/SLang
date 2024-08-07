@@ -42,7 +42,7 @@ static void parser_print_expected_token(token_type type) {
     printf("\n");
 }
 
-#define PARSER_ERROR() printf("[PARSER ERROR]: ")
+#define PARSER_ERROR(...) SLC_ERROR("PARSER", __VA_ARGS__)
 
 static token *parser_seek_token(parser *parser, token_type type) {
     token *current_token = parser_current_token(parser);
@@ -50,9 +50,8 @@ static token *parser_seek_token(parser *parser, token_type type) {
         return NULL;
     }
     if (token_get_type(current_token) != type) {
-        slc_print_compiler_execuatable_name();
+        PARSER_ERROR("");
         token_print_pos(current_token);
-        PARSER_ERROR();
         printf("unexpected token: ");
         token_print(current_token);
         printf("; ");
@@ -85,9 +84,9 @@ static ast_node_bin_expr *parser_parse_bin_expr(ast_node_expr *node_expr_left, p
     case TOKEN_PLUS: node_bin_expr = ast_node_bin_expr_create_add(node_expr_left, NULL); break;
     case TOKEN_MINUS: node_bin_expr = ast_node_bin_expr_create_sub(node_expr_left, NULL); break;
     default:
-        slc_print_compiler_execuatable_name();
+        
         token_print_pos(current_token);
-        PARSER_ERROR();
+        PARSER_ERROR("");
         printf("Expected an operand. Instead got: ");
         token_print(current_token);
         printf(" \n");
@@ -103,9 +102,9 @@ static ast_node_bin_expr *parser_parse_bin_expr(ast_node_expr *node_expr_left, p
         ast_node_bin_expr_add_right(node_bin_expr, parser_parse_un_expr(parser));
         return node_bin_expr;
     default:
-        slc_print_compiler_execuatable_name();
+        
         token_print_pos(current_token);
-        PARSER_ERROR();
+        PARSER_ERROR("");
         printf("Expected an expression. Instead got: ");
         token_print(current_token);
         printf(" \n");
@@ -157,9 +156,9 @@ static ast_node_un_expr *parser_parse_un_expr(parser *parser) {
     case TOKEN_LPAREN: return ast_node_un_expr_create_paren_expr(parser_parse_paren_expr(parser));
 
     default:
-        slc_print_compiler_execuatable_name();
+        
         token_print_pos(current_token);
-        PARSER_ERROR();
+        PARSER_ERROR("");
         printf("Expected an unary expression. Instead got: ");
         token_print(current_token);
         printf(" \n");
@@ -178,9 +177,9 @@ static ast_node_expr *parser_parse_expr(parser *parser) {
         node_expr = ast_node_expr_create_un_expr(parser_parse_un_expr(parser));
         break;
     default:
-        slc_print_compiler_execuatable_name();
+        
         token_print_pos(current_token);
-        PARSER_ERROR();
+        PARSER_ERROR("");
         printf("Expected an expression. Instead got: ");
         token_print(current_token);
         printf(" \n");
@@ -252,9 +251,9 @@ static ast_node_stmt *parser_parse_stmt(parser *parser) {
     case TOKEN_RBRACE:
         return NULL;
     default:
-        slc_print_compiler_execuatable_name();
+        
         token_print_pos(current_token);
-        PARSER_ERROR();
+        PARSER_ERROR("");
         printf("Expected a statement. Instead got: ");
         token_print(current_token);
         printf(" \n");

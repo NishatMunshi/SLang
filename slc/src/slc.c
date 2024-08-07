@@ -22,15 +22,8 @@ void slc_init(char *compiler_executable_name) {
     slc->compiler_executable_name = compiler_executable_name;
 }
 
-void slc_print_usage() { 
-    slc_print_compiler_execuatable_name();
-    printf("[USAGE]: %s <source filename> <output filename>\n", slc->compiler_executable_name);
-}
-
-void slc_print_error_and_exit(char *message) {
-    slc_print_compiler_execuatable_name();
-    printf("%s\n", message);
-    exit(1);
+void slc_print_usage() {
+    SLC_INFO("USAGE", "%s <source filename> <output filename>\n", slc->compiler_executable_name);
 }
 
 void slc_compile(char *source_file_name, char *output_file_name) {
@@ -48,8 +41,4 @@ void slc_compile(char *source_file_name, char *output_file_name) {
 void slc_print_source_file_name() {
     printf("%s", slc->source_file_name);
     printf(":");
-}
-
-void slc_print_compiler_execuatable_name() {
-    printf("[SLC]: ");
 }

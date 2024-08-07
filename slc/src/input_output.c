@@ -13,15 +13,12 @@ static size_t io_get_file_size(FILE *file) {
     return size;
 }
 
-#define IO_ERROR() printf("[IO ERROR]: ")
+#define IO_ERROR(...) SLC_ERROR("INPUT_OUTPUT", __VA_ARGS__)
 
 static FILE *io_open_file(char *file_name, char *mode) {
     FILE *file = fopen(file_name, mode);
     if (!file) {
-        slc_print_compiler_execuatable_name();
-        IO_ERROR();
-        printf("could not open file '%s'.\n", file_name);
-        exit(1);
+        IO_ERROR("could not open file \"%s\".\n", file_name);
     }
     return file;
 }
