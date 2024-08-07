@@ -42,7 +42,7 @@ static void parser_print_expected_token(token_type type) {
     printf("\n");
 }
 
-#define PARSER_ERROR(...) SLC_ERROR("PARSER", __VA_ARGS__)
+#define PARSER_ERROR(...) printf("[SLC]: [PARSER ERROR]: ");
 
 static token *parser_seek_token(parser *parser, token_type type) {
     token *current_token = parser_current_token(parser);
@@ -50,7 +50,7 @@ static token *parser_seek_token(parser *parser, token_type type) {
         return NULL;
     }
     if (token_get_type(current_token) != type) {
-        PARSER_ERROR("");
+        PARSER_ERROR();
         token_print_pos(current_token);
         printf("unexpected token: ");
         token_print(current_token);
@@ -86,7 +86,7 @@ static ast_node_bin_expr *parser_parse_bin_expr(ast_node_expr *node_expr_left, p
     default:
         
         token_print_pos(current_token);
-        PARSER_ERROR("");
+        PARSER_ERROR();
         printf("Expected an operand. Instead got: ");
         token_print(current_token);
         printf(" \n");
@@ -104,7 +104,7 @@ static ast_node_bin_expr *parser_parse_bin_expr(ast_node_expr *node_expr_left, p
     default:
         
         token_print_pos(current_token);
-        PARSER_ERROR("");
+        PARSER_ERROR();
         printf("Expected an expression. Instead got: ");
         token_print(current_token);
         printf(" \n");
@@ -158,7 +158,7 @@ static ast_node_un_expr *parser_parse_un_expr(parser *parser) {
     default:
         
         token_print_pos(current_token);
-        PARSER_ERROR("");
+        PARSER_ERROR();
         printf("Expected an unary expression. Instead got: ");
         token_print(current_token);
         printf(" \n");
@@ -179,7 +179,7 @@ static ast_node_expr *parser_parse_expr(parser *parser) {
     default:
         
         token_print_pos(current_token);
-        PARSER_ERROR("");
+        PARSER_ERROR();
         printf("Expected an expression. Instead got: ");
         token_print(current_token);
         printf(" \n");
@@ -253,7 +253,7 @@ static ast_node_stmt *parser_parse_stmt(parser *parser) {
     default:
         
         token_print_pos(current_token);
-        PARSER_ERROR("");
+        PARSER_ERROR();
         printf("Expected a statement. Instead got: ");
         token_print(current_token);
         printf(" \n");
