@@ -36,13 +36,17 @@ static void parser_advance(parser *parser) {
     parser->current_token_list_node = list_node_get_next(parser->current_token_list_node);
 }
 
-static void parser_print_expected_token(token_type type) {
-    printf("was expecting: ");
-    token_type_print(type);
-    printf("\n");
+static void parser_print_error(token *current_token, char *expected_thing) {
+    printf("[SLC]: [PARSER ERROR]: ");                      
+    token_print_pos(current_token);                                 
+    printf("Expected %s; Instead got: ", expected_thing);   
+    token_print(current_token);                                     
+    printf(" \n");                                          
 }
 
-#define PARSER_ERROR(...) printf("[SLC]: [PARSER ERROR]: ");
+#define PARSER_ERROR(CURRENT_TOKEN, EXPECTED_THING_AS_CSTR)   \
+    parser_print_error(CURRENT_TOKEN, EXPECTED_THING_AS_CSTR);\
+    exit(1);
 
 static token *parser_seek_token(parser *parser, token_type type) {
     token *current_token = parser_current_token(parser);
@@ -50,13 +54,7 @@ static token *parser_seek_token(parser *parser, token_type type) {
         return NULL;
     }
     if (token_get_type(current_token) != type) {
-        PARSER_ERROR();
-        token_print_pos(current_token);
-        printf("unexpected token: ");
-        token_print(current_token);
-        printf("; ");
-        parser_print_expected_token(type);
-        exit(1);
+        PARSER_ERROR(current_token, token_get_type_as_string(type));
     } else {
         parser_advance(parser);
         return current_token;
@@ -83,15 +81,8 @@ static ast_node_bin_expr *parser_parse_bin_expr(ast_node_expr *node_expr_left, p
     switch (token_get_type(current_token)) {
     case TOKEN_PLUS: node_bin_expr = ast_node_bin_expr_create_add(node_expr_left, NULL); break;
     case TOKEN_MINUS: node_bin_expr = ast_node_bin_expr_create_sub(node_expr_left, NULL); break;
-    default:
-        
-        token_print_pos(current_token);
-        PARSER_ERROR();
-        printf("Expected an operand. Instead got: ");
-        token_print(current_token);
-        printf(" \n");
-        exit(1);
-        break;
+
+    default: PARSER_ERROR(current_token, "an operand");
     }
 
     current_token = parser_current_token(parser);
@@ -101,15 +92,8 @@ static ast_node_bin_expr *parser_parse_bin_expr(ast_node_expr *node_expr_left, p
     case TOKEN_LPAREN:
         ast_node_bin_expr_add_right(node_bin_expr, parser_parse_un_expr(parser));
         return node_bin_expr;
-    default:
         
-        token_print_pos(current_token);
-        PARSER_ERROR();
-        printf("Expected an expression. Instead got: ");
-        token_print(current_token);
-        printf(" \n");
-        exit(1);
-        break;
+    default: PARSER_ERROR(current_token, "an expression");
     }
 }
 
@@ -155,15 +139,7 @@ static ast_node_un_expr *parser_parse_un_expr(parser *parser) {
         return ast_node_un_expr_create_var(parser_parse_variable(parser));
     case TOKEN_LPAREN: return ast_node_un_expr_create_paren_expr(parser_parse_paren_expr(parser));
 
-    default:
-        
-        token_print_pos(current_token);
-        PARSER_ERROR();
-        printf("Expected an unary expression. Instead got: ");
-        token_print(current_token);
-        printf(" \n");
-        exit(1);
-        break;
+    default: PARSER_ERROR(current_token, "an unary expression");
     }
 }
 
@@ -173,26 +149,15 @@ static ast_node_expr *parser_parse_expr(parser *parser) {
     switch (token_get_type(current_token)) {
     case TOKEN_NUM:
     case TOKEN_IDENT:
-    case TOKEN_LPAREN:
-        node_expr = ast_node_expr_create_un_expr(parser_parse_un_expr(parser));
-        break;
-    default:
-        
-        token_print_pos(current_token);
-        PARSER_ERROR();
-        printf("Expected an expression. Instead got: ");
-        token_print(current_token);
-        printf(" \n");
-        exit(1);
-        break;
+    case TOKEN_LPAREN: node_expr = ast_node_expr_create_un_expr(parser_parse_un_expr(parser)); break;
+
+    default: PARSER_ERROR(current_token, "an expression");
     }
     do {
         current_token = parser_current_token(parser);
         switch (token_get_type(current_token)) {
         case TOKEN_PLUS:
-        case TOKEN_MINUS:
-            node_expr = ast_node_expr_create_bin_expr(parser_parse_bin_expr(node_expr, parser));
-            break;
+        case TOKEN_MINUS: node_expr = ast_node_expr_create_bin_expr(parser_parse_bin_expr(node_expr, parser)); break;
 
         default: return node_expr;
         }
@@ -248,17 +213,9 @@ static ast_node_stmt *parser_parse_stmt(parser *parser) {
     case TOKEN_RET: return ast_node_stmt_create_ret(parser_parse_ret(parser));
 
     case TOKEN_EOF:
-    case TOKEN_RBRACE:
-        return NULL;
-    default:
-        
-        token_print_pos(current_token);
-        PARSER_ERROR();
-        printf("Expected a statement. Instead got: ");
-        token_print(current_token);
-        printf(" \n");
-        exit(1);
-        break;
+    case TOKEN_RBRACE: return NULL;
+
+    default: PARSER_ERROR(current_token, "a statement");
     }
 }
 

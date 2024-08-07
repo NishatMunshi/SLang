@@ -45,28 +45,28 @@ token *token_create_from_word(string_view *word, size_t line, size_t col) {
     }
 }
 
-void token_type_print(token_type type) {
+char * token_get_type_as_string(token_type type) {
     switch (type) {
-    case TOKEN_VAR: printf("<TOKEN_VAR>"); break;
-    case TOKEN_IDENT: printf("<TOKEN_IDENT>"); break;
-    case TOKEN_LARROW: printf("<TOKEN_LARROW>"); break;
-    case TOKEN_NUM: printf("<TOKEN_NUM>"); break;
-    case TOKEN_DOT: printf("<TOKEN_DOT>"); break;
-    case TOKEN_PLUS: printf("<TOKEN_PLUS>"); break;
-    case TOKEN_MINUS: printf("<TOKEN_MINUS>"); break;
-    case TOKEN_LPAREN: printf("<TOKEN_LPAREN>"); break;
-    case TOKEN_RPAREN: printf("<TOKEN_RPAREN>"); break;
-    case TOKEN_LBRACE: printf("<TOKEN_LBRACE>"); break;
-    case TOKEN_RBRACE: printf("<TOKEN_RBRACE>"); break;
-    case TOKEN_IF: printf("<TOKEN_IF>"); break;
-    case TOKEN_LOOP: printf("<TOKEN_LOOP>"); break;
-    case TOKEN_FUNC: printf("<TOKEN_FUNC>"); break;
-    case TOKEN_COLON: printf("<TOKEN_COLON>"); break;
-    case TOKEN_COMMA: printf("<TOKEN_COMMA>"); break;
-    case TOKEN_DEFN: printf("<TOKEN_DEFN>"); break;
-    case TOKEN_RET: printf("<TOKEN_RET>"); break;
-    case TOKEN_UNIDENTIFIED: printf("<TOKEN_UNIDENTIFIED>"); break;
-    case TOKEN_EOF: printf("<TOKEN_EOF>"); break;
+    case TOKEN_VAR: return "<TOKEN_VAR>"; break;
+    case TOKEN_IDENT: return "<TOKEN_IDENT>"; break;
+    case TOKEN_LARROW: return "<TOKEN_LARROW>"; break;
+    case TOKEN_NUM: return "<TOKEN_NUM>"; break;
+    case TOKEN_DOT: return "<TOKEN_DOT>"; break;
+    case TOKEN_PLUS: return "<TOKEN_PLUS>"; break;
+    case TOKEN_MINUS: return "<TOKEN_MINUS>"; break;
+    case TOKEN_LPAREN: return "<TOKEN_LPAREN>"; break;
+    case TOKEN_RPAREN: return "<TOKEN_RPAREN>"; break;
+    case TOKEN_LBRACE: return "<TOKEN_LBRACE>"; break;
+    case TOKEN_RBRACE: return "<TOKEN_RBRACE>"; break;
+    case TOKEN_IF: return "<TOKEN_IF>"; break;
+    case TOKEN_LOOP: return "<TOKEN_LOOP>"; break;
+    case TOKEN_FUNC: return "<TOKEN_FUNC>"; break;
+    case TOKEN_COLON: return "<TOKEN_COLON>"; break;
+    case TOKEN_COMMA: return "<TOKEN_COMMA>"; break;
+    case TOKEN_DEFN: return "<TOKEN_DEFN>"; break;
+    case TOKEN_RET: return "<TOKEN_RET>"; break;
+    case TOKEN_UNIDENTIFIED: return "<TOKEN_UNIDENTIFIED>"; break;
+    case TOKEN_EOF: return "<TOKEN_EOF>"; break;
 
     default: assert(false && "unreachable");
     }
@@ -78,8 +78,7 @@ void token_print_pos(token *token) {
 }
 
 void token_print(token *token) {
-    token_type_print(token->type);
-    printf(": \"");
+    printf("%s: \"", token_get_type_as_string(token_get_type(token)));
     string_view_print(token->name);
     printf("\"");
 }

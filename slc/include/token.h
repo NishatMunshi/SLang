@@ -41,8 +41,8 @@ token *token_create_from_word(string_view *word, size_t line, size_t col);
 token_type   token_get_type(token *token);
 string_view *token_get_name(token *token);
 
-void token_type_print(token_type type);
-void token_print(token *token);
-void token_print_pos(token *token);
+char *token_get_type_as_string(token_type type);
+void  token_print(token *token);
+void  token_print_pos(token *token);
 
 #endif // SLC_TOKEN_H
