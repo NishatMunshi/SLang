@@ -72,16 +72,17 @@ static ast_node_func *ast_verifier_funcs_list_contains_func(list *funcs_list, st
     return NULL;
 }
 
-#define AST_VERIFIER_ERROR() printf("[SLC]: [AST_VERIFIER ERROR]: ");
+#define AST_VERIFIER_ERROR(TOKEN, MESSAGE)      \
+    printf("[SLC]: [AST_VERIFIER ERROR]: ");    \
+    token_print_pos(TOKEN);                     \
+    printf(MESSAGE": ");                        \
+    string_view_print(token_get_name(TOKEN));   \
+    printf("\n");                               \
+    exit(1);                                    \
 
 static void ast_verifier_verify_var_name_is_new(token *var_name_token, ast_verifier *verifier) {
     if (ast_verifier_vars_list_contains_var(verifier->vars_list, token_get_name(var_name_token))) {
-        AST_VERIFIER_ERROR();
-        token_print_pos(var_name_token);
-        printf("variable '");
-        string_view_print(token_get_name(var_name_token));
-        printf("' is already defined.\n");
-        exit(1);
+        AST_VERIFIER_ERROR(var_name_token, "variable is already defined");
     }
 }
 
@@ -99,23 +100,13 @@ static ast_node_var *ast_verifier_verify_var_exists(token *var_name_token, ast_v
     if (list_var) {
         return list_var;
     }
-    AST_VERIFIER_ERROR();
-    token_print_pos(var_name_token);
-    printf("variable '");
-    string_view_print(token_get_name(var_name_token));
-    printf("' is not defined.\n");
-    exit(1);
+    AST_VERIFIER_ERROR(var_name_token, "variable is not defined");
 }
 
 static void ast_verifier_verify_func_name_is_new(token *func_name_token, ast_verifier *verifier) {
     ast_node_func *node_func = ast_verifier_funcs_list_contains_func(verifier->funcs_list, token_get_name(func_name_token));
     if (node_func) {
-        AST_VERIFIER_ERROR();
-        token_print_pos(func_name_token);
-        printf("function '");
-        string_view_print(token_get_name(func_name_token));
-        printf("' is already defined.\n");
-        exit(1);
+        AST_VERIFIER_ERROR(func_name_token, "function is already defined");
     }
 }
 
@@ -124,24 +115,14 @@ static ast_node_func *ast_verifier_verify_func_exists(token *func_name_token, as
     if (node_func) {
         return node_func;
     }
-    AST_VERIFIER_ERROR();
-    token_print_pos(func_name_token);
-    printf("function '");
-    string_view_print(token_get_name(func_name_token));
-    printf("' is not defined.\n");
-    exit(1);
+    AST_VERIFIER_ERROR(func_name_token, "function is not defined");
 }
 
 // -------------------------------------------------------------------------------------------------------------
 
 static void ast_verifier_check_num_args(ast_node_call *node_call, ast_node_func *node_func) {
     if (list_get_size(ast_node_func_get_params(node_func)) != list_get_size(ast_node_call_get_args(node_call))) {
-        AST_VERIFIER_ERROR();
-        token_print_pos(ast_node_call_get_name(node_call));
-        printf("incorrect number of arguments in function call: ");
-        string_view_print(token_get_name(ast_node_call_get_name(node_call)));
-        printf("\n");
-        exit(1);
+        AST_VERIFIER_ERROR(ast_node_call_get_name(node_call), "incorrect number of arguments in function call");
     }
 }
 
@@ -260,8 +241,7 @@ static void ast_verifier_verify_func(ast_node_func *node_func, ast_verifier *ver
 
 static void ast_verifier_verify_enter_exists(ast_verifier *verifier) {
     if (!ast_verifier_enter_exists(verifier)) {
-        AST_VERIFIER_ERROR();
-        printf("function \"enter\" not found.\n");
+        printf("[SLC]: [AST_VERIFIER ERROR]: function \"enter\" not found.\n");
         exit(1);
     }
 }
