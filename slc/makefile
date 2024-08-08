@@ -2,8 +2,8 @@
 CUR_DIR  = $(notdir $(shell pwd))
 HDR_DIR  = ./include
 SRC_DIR  = ./src
-OBJ_DIR  = ./obj
-EXE_DIR  = ./exe
+OBJ_DIR  = ./build
+EXE_DIR  = ./bin
 TMP_DIRS = $(OBJ_DIR) $(EXE_DIR)
 
 # file extentions

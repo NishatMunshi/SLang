@@ -1,7 +1,7 @@
-SUBMAKE_DIRS = $(dir $(wildcard */makefile))
+SUBMAKE_DIRS = $(dir $(shell find -mindepth 2 -maxdepth 10 -type f -name "makefile"))
 
 all:
-	@$(MAKE) --no-print-directory -C docs
+	@$(MAKE) --no-print-directory -C docs/grammar
 	@$(MAKE) --no-print-directory -C slc
 	@$(MAKE) --no-print-directory -C example
 

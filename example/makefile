@@ -2,8 +2,8 @@
 CUR_DIR  = $(notdir $(shell pwd))
 SRC_DIR  = ./src
 ASS_DIR  = ./ass
-OBJ_DIR  = ./obj
-EXE_DIR  = ./exe
+OBJ_DIR  = ./build
+EXE_DIR  = ./bin
 TMP_DIRS = $(ASS_DIR) $(OBJ_DIR) $(EXE_DIR)
 
 # file extensions
@@ -22,7 +22,7 @@ TARGET = $(EXE_DIR)/example
 .SECONDARY: $(ASSS)
 
 # compiler info
-SLC = ../slc/exe/slc
+SLC = ../slc/bin/slc
 
 # assembler info
 ASS       = nasm
