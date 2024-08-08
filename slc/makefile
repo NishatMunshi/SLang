@@ -3,8 +3,8 @@ CUR_DIR  = $(notdir $(shell pwd))
 HDR_DIR  = ./include
 SRC_DIR  = ./src
 OBJ_DIR  = ./build
-EXE_DIR  = ./exec
-TMP_DIRS = $(OBJ_DIR) $(EXE_DIR)
+EXE_DIR  = .
+TMP_DIRS = $(OBJ_DIR)
 
 # file extentions
 HDR_EXT = h
@@ -52,6 +52,6 @@ $(OBJ_DIR)/%.$(OBJ_EXT): $(SRC_DIR)/%.$(SRC_EXT) $(HDR_DIR)/%.$(HDR_EXT)
 # rule to clean the temporary directories
 clean:
 	@echo [MAKE]: cleaning temporary directories in $(CUR_DIR)
-	@rm -rf $(TMP_DIRS)
+	@rm -rf $(TMP_DIRS) $(TARGET)
 
 .PHONY: all debug release clean

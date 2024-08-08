@@ -3,8 +3,8 @@ CUR_DIR  = $(notdir $(shell pwd))
 SRC_DIR  = ./src
 ASS_DIR  = ./ass
 OBJ_DIR  = ./build
-EXE_DIR  = ./exec
-TMP_DIRS = $(ASS_DIR) $(OBJ_DIR) $(EXE_DIR)
+EXE_DIR  = .
+TMP_DIRS = $(ASS_DIR) $(OBJ_DIR)
 
 # file extensions
 SRC_EXT = sl
@@ -22,7 +22,7 @@ TARGET = $(EXE_DIR)/example
 .SECONDARY: $(ASSS)
 
 # compiler info
-SLC = ../slc/exec/slc
+SLC = ../slc/slc
 
 # assembler info
 ASS       = nasm
@@ -59,6 +59,6 @@ run: $(TARGET)
 # rule to clean the temporary directories
 clean:
 	@echo [MAKE]: cleaning temporary directories in $(CUR_DIR)
-	@rm -rf $(TMP_DIRS)
+	@rm -rf $(TMP_DIRS) $(TARGET)
 
 .PHONY: all run clean
