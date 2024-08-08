@@ -26,7 +26,7 @@ $(TARGET): $(SRCS)
 
 # rule to clean the temporary files
 clean:
-	@echo [MAKE]: cleaning temporary files in $(CUR_DIR)
+	@echo [MAKE]: cleaning temporaries in $(CUR_DIR)
 	@rm -f $(TMPS)
 
 .PHONY: all clean
