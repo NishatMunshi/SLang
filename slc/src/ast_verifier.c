@@ -1,6 +1,7 @@
 #include "../include/ast_verifier.h"
 #include "../include/arena_allocator.h"
 #include "../include/slc.h"
+#include "../include/stack.h"
 #include "../include/utils.h"
 
 #include <stdio.h>
@@ -8,15 +9,15 @@
 
 typedef struct ast_verifier_struct {
     list *funcs_list;
-    list *vars_list;
+    stack *vars_stack;
     bool enter_exists;
-    list_node *scope_end_var;
+    size_t var_stack_size_at_scope_entry;
 } ast_verifier;
 
 static ast_verifier *ast_verifier_create() {
     ast_verifier *verifier = arena_allocator_allocate(sizeof(struct ast_verifier_struct));
     verifier->funcs_list = list_create();
-    verifier->vars_list = NULL;
+    verifier->vars_stack = NULL;
     verifier->enter_exists = false;
 
     return verifier;
@@ -35,27 +36,31 @@ static void ast_verifier_add_func(ast_verifier *verifier, ast_node_func *node_fu
 }
 
 static void ast_verifier_add_var(ast_verifier *verifier, ast_node_var *node_var) {
-    list_push(verifier->vars_list, node_var);
+    stack_push(verifier->vars_stack, node_var);
 }
 
 static void ast_verifier_reset_vars_list(ast_verifier *verifier) {
-    verifier->vars_list = list_create();
+    verifier->vars_stack = stack_create();
 }
 
 static size_t ast_verifier_get_num_vars(ast_verifier *verifier) {
-    return list_get_size(verifier->vars_list);
+    return stack_get_size(verifier->vars_stack);
 }
 
 static void ast_verifier_enter_scope(ast_verifier *verifier) {
-    verifier->scope_end_var = list_get_end(verifier->vars_list);
+    verifier->var_stack_size_at_scope_entry = stack_get_size(verifier->vars_stack);
 }
 
 static void ast_verifier_leave_scope(ast_verifier *verifier) {
-    list_chop_after_and_including(verifier->vars_list, verifier->scope_end_var);
+    size_t vars_stack_current_size = stack_get_size(verifier->vars_stack);
+    size_t items_to_pop = vars_stack_current_size - verifier->var_stack_size_at_scope_entry;
+    for(size_t i = 0; i < items_to_pop; ++i) {
+        stack_pop(verifier->vars_stack);
+    }
 }
 
-static ast_node_var *ast_verifier_vars_list_contains_var(list *vars_list, string_view *var_name) {
-    LIST_FOR_EACH(ast_node_var, var, vars_list) {
+static ast_node_var *ast_verifier_vars_list_contains_var(stack *vars_stack, string_view *var_name) {
+    STACK_FOR_EACH(ast_node_var, var, vars_stack) {
         if (string_view_compare(ast_node_var_get_name(var), var_name)) {
             return var;
         }
@@ -81,13 +86,13 @@ static ast_node_func *ast_verifier_funcs_list_contains_func(list *funcs_list, st
     exit(1);                                    \
 
 static void ast_verifier_verify_var_name_is_new(token *var_name_token, ast_verifier *verifier) {
-    if (ast_verifier_vars_list_contains_var(verifier->vars_list, token_get_name(var_name_token))) {
+    if (ast_verifier_vars_list_contains_var(verifier->vars_stack, token_get_name(var_name_token))) {
         AST_VERIFIER_ERROR(var_name_token, "variable is already defined");
     }
 }
 
 static long ast_verifier_calc_new_var_offset(ast_verifier *verifier) {
-    ast_node_var *last_node_var = list_get_back(verifier->vars_list);
+    ast_node_var *last_node_var = stack_node_get_data(stack_get_top(verifier->vars_stack));
     long offset = 0;
     if (last_node_var) {
         offset = ast_node_var_get_offset(last_node_var);
@@ -96,7 +101,7 @@ static long ast_verifier_calc_new_var_offset(ast_verifier *verifier) {
 }
 
 static ast_node_var *ast_verifier_verify_var_exists(token *var_name_token, ast_verifier *verifier) {
-    ast_node_var *list_var = ast_verifier_vars_list_contains_var(verifier->vars_list, token_get_name(var_name_token));
+    ast_node_var *list_var = ast_verifier_vars_list_contains_var(verifier->vars_stack, token_get_name(var_name_token));
     if (list_var) {
         return list_var;
     }

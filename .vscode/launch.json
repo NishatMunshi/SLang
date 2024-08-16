@@ -4,13 +4,14 @@
         "name": "(gdb) Launch",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/slc/exec/slc",
-        "args": ["${workspaceFolder}/examples/src/main.sl", "${workspaceFolder}/examples/ass/main.s"],
+        "program": "${workspaceFolder}/slc/bin/slc",
+        "args": ["${workspaceFolder}/example/src/main.sl", "${workspaceFolder}/example/ass/main.s"],
         "stopAtEntry": false,
         "cwd": "${fileDirname}",
         "environment": [],
         "externalConsole": false,
         "MIMode": "gdb",
+        "miDebuggerPath": "/usr/bin/gdb",
         "setupCommands": [
             {
                 "description": "Enable pretty-printing for gdb",

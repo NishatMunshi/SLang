@@ -7,5 +7,5 @@ func fibonacci : (n) := {
 }
 
 func enter : () := {
-    ret fibonacci(8).
+    ret fibonacci(9).
 }
