@@ -8,32 +8,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct parser_struct {
+static struct parser_struct {
     list *token_list;
     list_node *current_token_list_node;
-} parser;
+} parser = {0};
 
-static parser *parser_create(list *token_list) {
-    parser *parser = arena_allocator_allocate(sizeof(struct parser_struct));
-    parser->token_list = token_list;
-    parser->current_token_list_node = list_get_begin(token_list);
-    return parser;
+static void parser_init(list *token_list) {
+    parser.token_list = token_list;
+    parser.current_token_list_node = list_get_begin(token_list);
 }
 
-static bool parser_tokens_in_bound(parser *parser) {
-    return parser->current_token_list_node != list_get_end(parser->token_list);
+static bool parser_tokens_in_bound() {
+    return parser.current_token_list_node != list_get_end(parser.token_list);
 }
 
-static token *parser_current_token(parser *parser) {
-    return parser_tokens_in_bound(parser) ? list_node_get_data(parser->current_token_list_node) : NULL;
+static token *parser_current_token() {
+    return parser_tokens_in_bound(parser) ? list_node_get_data(parser.current_token_list_node) : NULL;
 }
 
-static token *parser_next_token(parser *parser) {
-    return list_node_get_data(list_node_get_next(parser->current_token_list_node));
+static token *parser_next_token() {
+    return list_node_get_data(list_node_get_next(parser.current_token_list_node));
 }
 
-static void parser_advance(parser *parser) {
-    parser->current_token_list_node = list_node_get_next(parser->current_token_list_node);
+static void parser_advance() {
+    parser.current_token_list_node = list_node_get_next(parser.current_token_list_node);
 }
 
 static void parser_print_error(token *current_token, char *expected_thing) {
@@ -48,7 +46,7 @@ static void parser_print_error(token *current_token, char *expected_thing) {
     parser_print_error(CURRENT_TOKEN, EXPECTED_THING_AS_CSTR);\
     exit(1);
 
-static token *parser_seek_token(parser *parser, token_type type) {
+static token *parser_seek_token(token_type type) {
     token *current_token = parser_current_token(parser);
     if (!current_token) {
         return NULL;
@@ -61,20 +59,20 @@ static token *parser_seek_token(parser *parser, token_type type) {
     }
 }
 
-static ast_node_var *parser_parse_variable(parser *parser) {
-    token *token_variable_name = parser_seek_token(parser, TOKEN_IDENT);
+static ast_node_var *parser_parse_variable() {
+    token *token_variable_name = parser_seek_token(TOKEN_IDENT);
     return ast_node_var_create(token_variable_name);
 }
 
-static ast_node_num *parser_parse_num(parser *parser) {
-    token *token_num = parser_seek_token(parser, TOKEN_NUM);
+static ast_node_num *parser_parse_num() {
+    token *token_num = parser_seek_token(TOKEN_NUM);
     return ast_node_num_create(token_get_name(token_num));
 }
 
-static ast_node_expr *parser_parse_expr(parser *parser);
-static ast_node_un_expr *parser_parse_un_expr(parser *parser);
+static ast_node_expr *parser_parse_expr();
+static ast_node_un_expr *parser_parse_un_expr();
 
-static ast_node_bin_expr *parser_parse_bin_expr(ast_node_expr *node_expr_left, parser *parser) {
+static ast_node_bin_expr *parser_parse_bin_expr(ast_node_expr *node_expr_left) {
     ast_node_bin_expr *node_bin_expr = NULL;
     token *current_token = parser_current_token(parser);
     parser_advance(parser);
@@ -97,16 +95,16 @@ static ast_node_bin_expr *parser_parse_bin_expr(ast_node_expr *node_expr_left, p
     }
 }
 
-static ast_node_paren_expr *parser_parse_paren_expr(parser *parser) {
-    parser_seek_token(parser, TOKEN_LPAREN);
+static ast_node_paren_expr *parser_parse_paren_expr() {
+    parser_seek_token(TOKEN_LPAREN);
     ast_node_paren_expr *node_paren_expr = ast_node_paren_expr_create(parser_parse_expr(parser));
-    parser_seek_token(parser, TOKEN_RPAREN);
+    parser_seek_token(TOKEN_RPAREN);
 
     return node_paren_expr;
 }
 
-static list *parser_parse_call_args(parser *parser) {
-    parser_seek_token(parser, TOKEN_LPAREN);
+static list *parser_parse_call_args() {
+    parser_seek_token(TOKEN_LPAREN);
 
     list *args_list = list_create();
     if (token_get_type(parser_current_token(parser)) != TOKEN_RPAREN) {
@@ -116,19 +114,19 @@ static list *parser_parse_call_args(parser *parser) {
             list_push(args_list, parser_parse_expr(parser));
         }
     }
-    parser_seek_token(parser, TOKEN_RPAREN);
+    parser_seek_token(TOKEN_RPAREN);
 
     return args_list;
 }
 
-static ast_node_call *parser_parse_call(parser *parser) {
-    token *name = parser_seek_token(parser, TOKEN_IDENT);
+static ast_node_call *parser_parse_call() {
+    token *name = parser_seek_token(TOKEN_IDENT);
     list *args_list = parser_parse_call_args(parser);
 
     return ast_node_call_create(name, args_list);
 }
 
-static ast_node_un_expr *parser_parse_un_expr(parser *parser) {
+static ast_node_un_expr *parser_parse_un_expr() {
     token *current_token = parser_current_token(parser);
     switch (token_get_type(current_token)) {
     case TOKEN_NUM: return ast_node_un_expr_create_num(parser_parse_num(parser));
@@ -143,7 +141,7 @@ static ast_node_un_expr *parser_parse_un_expr(parser *parser) {
     }
 }
 
-static ast_node_expr *parser_parse_expr(parser *parser) {
+static ast_node_expr *parser_parse_expr() {
     token *current_token = parser_current_token(parser);
     ast_node_expr *node_expr = NULL;
     switch (token_get_type(current_token)) {
@@ -157,53 +155,53 @@ static ast_node_expr *parser_parse_expr(parser *parser) {
         current_token = parser_current_token(parser);
         switch (token_get_type(current_token)) {
         case TOKEN_PLUS:
-        case TOKEN_MINUS: node_expr = ast_node_expr_create_bin_expr(parser_parse_bin_expr(node_expr, parser)); break;
+        case TOKEN_MINUS: node_expr = ast_node_expr_create_bin_expr(parser_parse_bin_expr(node_expr)); break;
 
         default: return node_expr;
         }
     } while (true);
 }
 
-static ast_node_asst *parser_parse_asst(parser *parser) {
+static ast_node_asst *parser_parse_asst() {
     ast_node_var *node_var = parser_parse_variable(parser);
-    parser_seek_token(parser, TOKEN_LARROW);
+    parser_seek_token(TOKEN_LARROW);
     ast_node_expr *node_expr = parser_parse_expr(parser);
-    parser_seek_token(parser, TOKEN_DOT);
+    parser_seek_token(TOKEN_DOT);
 
     return ast_node_asst_create(node_var, node_expr);
 }
 
-static ast_node_decl *parser_parse_decl(parser *parser) {
-    parser_seek_token(parser, TOKEN_VAR);
+static ast_node_decl *parser_parse_decl() {
+    parser_seek_token(TOKEN_VAR);
     return parser_parse_asst(parser);
 }
 
-static ast_node_scope *parser_parse_scope(parser *parser);
+static ast_node_scope *parser_parse_scope();
 
-static ast_node_cond *parser_parse_cond(parser *parser) {
-    parser_seek_token(parser, TOKEN_IF);
+static ast_node_cond *parser_parse_cond() {
+    parser_seek_token(TOKEN_IF);
     ast_node_expr *node_expr = parser_parse_expr(parser);
     ast_node_scope *node_scope = parser_parse_scope(parser);
 
     return ast_node_cond_create(node_expr, node_scope);
 }
 
-static ast_node_loop *parser_parse_loop(parser *parser) {
-    parser_seek_token(parser, TOKEN_LOOP);
+static ast_node_loop *parser_parse_loop() {
+    parser_seek_token(TOKEN_LOOP);
     ast_node_expr *node_expr = parser_parse_expr(parser);
     ast_node_scope *node_scope = parser_parse_scope(parser);
 
     return ast_node_loop_create(node_expr, node_scope);
 }
 
-static ast_node_ret *parser_parse_ret(parser *parser) {
-    parser_seek_token(parser, TOKEN_RET);
+static ast_node_ret *parser_parse_ret() {
+    parser_seek_token(TOKEN_RET);
     ast_node_expr *node_expr = parser_parse_expr(parser);
-    parser_seek_token(parser, TOKEN_DOT);
+    parser_seek_token(TOKEN_DOT);
     return ast_node_ret_create(node_expr);
 }
 
-static ast_node_stmt *parser_parse_stmt(parser *parser) {
+static ast_node_stmt *parser_parse_stmt() {
     token *current_token = parser_current_token(parser);
     switch (token_get_type(current_token)) {
     case TOKEN_VAR: return ast_node_stmt_create_decl(parser_parse_decl(parser));
@@ -219,21 +217,21 @@ static ast_node_stmt *parser_parse_stmt(parser *parser) {
     }
 }
 
-static ast_node_scope *parser_parse_scope(parser *parser) {
-    parser_seek_token(parser, TOKEN_LBRACE);
+static ast_node_scope *parser_parse_scope() {
+    parser_seek_token(TOKEN_LBRACE);
     ast_node_scope *node_scope = ast_node_scope_create();
     for (ast_node_stmt *node_stmt = parser_parse_stmt(parser);
          node_stmt != NULL;
          node_stmt = parser_parse_stmt(parser)) {
         ast_node_scope_add_stmt(node_scope, node_stmt);
     }
-    parser_seek_token(parser, TOKEN_RBRACE);
+    parser_seek_token(TOKEN_RBRACE);
 
     return node_scope;
 }
 
-static list *parser_parse_func_params(parser *parser) {
-    parser_seek_token(parser, TOKEN_LPAREN);
+static list *parser_parse_func_params() {
+    parser_seek_token(TOKEN_LPAREN);
 
     list *params_list = list_create();
     if (token_get_type(parser_current_token(parser)) == TOKEN_IDENT) {
@@ -246,23 +244,23 @@ static list *parser_parse_func_params(parser *parser) {
         }
     }
 
-    parser_seek_token(parser, TOKEN_RPAREN);
+    parser_seek_token(TOKEN_RPAREN);
 
     return params_list;
 }
 
-static ast_node_func *parser_parser_func(parser *parser) {
-    parser_seek_token(parser, TOKEN_FUNC);
-    token *name = parser_seek_token(parser, TOKEN_IDENT);
-    parser_seek_token(parser, TOKEN_COLON);
+static ast_node_func *parser_parser_func() {
+    parser_seek_token(TOKEN_FUNC);
+    token *name = parser_seek_token(TOKEN_IDENT);
+    parser_seek_token(TOKEN_COLON);
     list *params_list = parser_parse_func_params(parser);
-    parser_seek_token(parser, TOKEN_DEFN);
+    parser_seek_token(TOKEN_DEFN);
     ast_node_scope *node_scope = parser_parse_scope(parser);
     return ast_node_func_create(name, params_list, node_scope);
 }
 
 ast_node_prog *parser_parse_prog(list *token_list) {
-    parser *parser = parser_create(token_list);
+    parser_init(token_list);
 
     list *funcs_list = list_create();
     while (token_get_type(parser_current_token(parser)) != TOKEN_EOF) {

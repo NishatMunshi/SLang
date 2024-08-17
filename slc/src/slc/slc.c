@@ -9,23 +9,16 @@
 
 #include <stdlib.h>
 
-struct slc_struct {
+static struct slc_struct {
     char *compiler_executable_name;
     char *source_file_name;
     char *output_file_name;
-};
-
-static struct slc_struct *slc = NULL;
-
-static void slc_create(char *compiler_executable_name) {
-    slc = arena_allocator_allocate(sizeof(struct slc_struct));
-    slc->compiler_executable_name = compiler_executable_name;
-}
+} slc = {0};
 
 void slc_compile(char *compiler_executable_name, char *source_file_name, char *output_file_name) {
-    slc_create(compiler_executable_name);
-    slc->source_file_name = source_file_name;
-    slc->output_file_name = output_file_name;
+    slc.compiler_executable_name = compiler_executable_name;
+    slc.source_file_name = source_file_name;
+    slc.output_file_name = output_file_name;
     
     string_view *source_code = io_read_file_into_string_view(source_file_name);
     list *token_list = lexer_lex(source_code);
@@ -36,5 +29,5 @@ void slc_compile(char *compiler_executable_name, char *source_file_name, char *o
 }
 
 char *slc_get_source_file_name() {
-    return slc->source_file_name;
+    return slc.source_file_name;
 }
