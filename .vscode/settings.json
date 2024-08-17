@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "stddef.h": "c"
+        "stddef.h": "c",
+        "input_output.h": "c",
+        "cstdlib": "c",
+        "slc.h": "c"
     }
 }

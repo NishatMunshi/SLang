@@ -1,5 +1,5 @@
-#include "../include/main.h"
-#include "../include/slc.h"
+#include "main.h"
+#include "ui/slc.h"
 
 int main(int argc, char **argv) {
     slc_init(argv[0]);
