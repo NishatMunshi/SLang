@@ -1,7 +1,8 @@
 #include "ds/token/token.h"
 #include "memory/arena_allocator.h"
-#include "ui/slc.h"
+#include "ui/ui.h"
 #include "utils/utils.h"
+#include "slc/slc.h"
 
 #include <stdio.h>
 
@@ -73,8 +74,7 @@ char * token_get_type_as_string(token_type type) {
 }
 
 void token_print_pos(token *token) {
-    slc_print_source_file_name();
-    printf("%zu:%zu: ", token->line, token->col);
+    printf("%s:%zu:%zu: ",slc_get_source_file_name(), token->line, token->col);
 }
 
 void token_print(token *token) {

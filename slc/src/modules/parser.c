@@ -3,7 +3,7 @@
 #include "ds/ast/ast_node.h"
 #include "ds/list/list.h"
 #include "ds/token/token.h"
-#include "ui/slc.h"
+#include "ui/ui.h"
 
 #include <stdio.h>
 #include <stdlib.h>

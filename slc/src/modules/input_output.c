@@ -1,6 +1,6 @@
 #include "modules/input_output.h"
 #include "memory/arena_allocator.h"
-#include "ui/slc.h"
+#include "ui/ui.h"
 
 #include <stdint.h>
 #include <stdio.h>
@@ -13,7 +13,7 @@ static size_t io_get_file_size(FILE *file) {
     return size;
 }
 
-#define IO_ERROR(...) SLC_ERROR("INPUT_OUTPUT", __VA_ARGS__)
+#define IO_ERROR(...) UI_ERROR("INPUT_OUTPUT", __VA_ARGS__)
 
 static FILE *io_open_file(char *file_name, char *mode) {
     FILE *file = fopen(file_name, mode);

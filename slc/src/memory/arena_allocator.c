@@ -1,5 +1,5 @@
 #include "memory/arena_allocator.h"
-#include "ui/slc.h"
+#include "ui/ui.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,9 +13,9 @@ typedef struct arena_allocator_struct {
 
 static arena_allocator *allocator = NULL;
 
-#define ARENA_ALLOCATOR_ERROR(...) SLC_ERROR("ARENA_ALLOCATOR", __VA_ARGS__)
+#define ARENA_ALLOCATOR_ERROR(...) UI_ERROR("ARENA_ALLOCATOR", __VA_ARGS__)
 
-void arena_allocator_init() {
+static void arena_allocator_init() {
     allocator = calloc(1, ARENA_ALLOCATOR_CARACITY_IN_BYTES);
     allocator->begin = (char *)allocator + sizeof(struct arena_allocator_struct);
     if (!allocator->begin) {
@@ -25,6 +25,9 @@ void arena_allocator_init() {
 }
 
 void *arena_allocator_allocate(size_t num_of_bytes){
+    if(!allocator) {
+        arena_allocator_init();
+    }
     if (allocator->next_free_spot + num_of_bytes > ARENA_ALLOCATOR_CARACITY_IN_BYTES) {
         ARENA_ALLOCATOR_ERROR("not enough memory to allocate %zu bytes\n", num_of_bytes);
     }

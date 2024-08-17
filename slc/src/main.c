@@ -1,16 +1,16 @@
 #include "main.h"
-#include "ui/slc.h"
+#include "ui/ui.h"
+#include "slc/slc.h"
 
 int main(int argc, char **argv) {
-    slc_init(argv[0]);
     if (argc < 2) {
-        slc_print_usage();
-        SLC_ERROR("USAGE", "no source file provided.\n");
+        ui_print_usage(argv[0]);
+        UI_ERROR("USAGE", "no source file provided.\n");
     }
     if (argc < 3) {
-        slc_print_usage();
-        SLC_ERROR("USAGE", "no output file provided.\n");
+        ui_print_usage(argv[0]);
+        UI_ERROR("USAGE", "no output file provided.\n");
     }
-    slc_compile(argv[1], argv[2]);
+    slc_compile(argv[0], argv[1], argv[2]);
     return 0;
 }

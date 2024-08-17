@@ -1,6 +1,6 @@
 #include "modules/ast_verifier.h"
 #include "memory/arena_allocator.h"
-#include "ui/slc.h"
+#include "ui/ui.h"
 #include "ds/stack/stack.h"
 #include "utils/utils.h"
 
