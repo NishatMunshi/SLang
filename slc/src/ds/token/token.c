@@ -69,7 +69,7 @@ char * token_get_type_as_string(token_type type) {
     case TOKEN_UNIDENTIFIED: return "<TOKEN_UNIDENTIFIED>"; break;
     case TOKEN_EOF: return "<TOKEN_EOF>"; break;
 
-    default: UNREACHABLE;
+    default: UNREACHABLE();
     }
 }
 

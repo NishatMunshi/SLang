@@ -2,6 +2,13 @@
 #include "memory/arena_allocator.h"
 #include "ds/list/list.h"
 #include "utils/utils.h"
+#include "ds/ast/ast_node_num.h"
+#include "ds/ast/ast_node_var.h"
+#include "ds/ast/ast_node_expr.h"
+#include "ds/ast/ast_node_decl.h"
+#include "ds/ast/ast_node_asst.h"
+#include "ds/ast/ast_node_scope.h"
+#include "ds/ast/ast_node_func.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -43,7 +50,7 @@ static string *ass_gen_generate_bin_expr(ast_node_bin_expr *node_bin_expr) {
     case AST_NODE_BIN_EXPR_ADD: ass_instruction = string_create_from_cstr("    add rax, rbx\n"); break;
     case AST_NODE_BIN_EXPR_SUB: ass_instruction = string_create_from_cstr("    sub rax, rbx\n"); break;
 
-    default: UNREACHABLE;
+    default: UNREACHABLE();
     }
 
     string_concat(ass_left_expr, ass_save_rax);
@@ -89,7 +96,7 @@ static string *ass_gen_generate_un_expr(ast_node_un_expr *node_un_expr) {
     case AST_NODE_UN_EXPR_PAREN_EXPR: return ass_gen_generate_paren_expr(ast_node_un_expr_get_paren_expr(node_un_expr));
     case AST_NODE_UN_EXPR_CALL: return ass_gen_generate_call(ast_node_un_expr_get_call(node_un_expr));
 
-    default: UNREACHABLE;
+    default: UNREACHABLE();
     }
 }
 
@@ -98,7 +105,7 @@ static string *ass_gen_generate_expr(ast_node_expr *node_expr) {
     case AST_NODE_EXPR_UN_EXPR: return ass_gen_generate_un_expr(ast_node_expr_get_un_expr(node_expr));
     case AST_NODE_EXPR_BIN_EXPR: return ass_gen_generate_bin_expr(ast_node_expr_get_bin_expr(node_expr));
 
-    default: UNREACHABLE;
+    default: UNREACHABLE();
     }
 }
 
@@ -132,7 +139,7 @@ static string *ass_gen_generate_asst(ast_node_asst *node_asst) {
 
 static string *ass_gen_generate_scope(ast_node_scope *node_scope);
 
-static string *ass_gen_generate_new_label(void) {
+static string *ass_gen_generate_new_label() {
     static size_t label = 0;
     char *template = "label%zu";
     char *cstr = arena_allocator_allocate(strlen(template) + utils_count_digits_in_num(label));
@@ -203,7 +210,7 @@ static string *ass_gen_generate_stmt(ast_node_stmt *node_stmt) {
     case AST_NODE_STMT_LOOP: return ass_gen_generate_loop(ast_node_stmt_get_loop(node_stmt));
     case AST_NODE_STMT_RET: return ass_gen_generate_ret(ast_node_stmt_get_ret(node_stmt));
 
-    default: UNREACHABLE;
+    default: UNREACHABLE();
     }
 }
 

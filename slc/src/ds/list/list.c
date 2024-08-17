@@ -16,6 +16,7 @@ list *list_create() {
     list->begin = list->end = list_node_create();
     list->back = NULL;
     list->size = 0;
+
     return list;
 }
 
@@ -38,15 +39,6 @@ list_node *list_get_end(list *list) {
 
 size_t list_get_size(list *list) {
     return list->size;
-}
-
-void list_chop_after_and_including(list *list, list_node *end_node) {
-    list->end = end_node;
-    list->size = 0;
-    LIST_FOR_EACH(char , list_node, list) {
-        list->size++;
-        (void)list_node;
-    }
 }
 
 void *list_get_back(list *list) {

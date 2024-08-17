@@ -6,10 +6,12 @@
 
 typedef struct stack_struct stack;
 
-stack* stack_create();
-void stack_push(stack* stack, void* data);
-void* stack_pop(stack* stack);
-size_t stack_get_size(stack* stack);
+stack *stack_create();
+
+void  stack_push(stack* stack, void* data);
+void *stack_pop(stack* stack);
+
+size_t      stack_get_size(stack* stack);
 stack_node* stack_get_top(stack* stack);
 
 #define STACK_FOR_EACH(type, item, stack_name) \

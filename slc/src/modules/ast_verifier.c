@@ -3,6 +3,22 @@
 #include "ui/ui.h"
 #include "ds/stack/stack.h"
 #include "utils/utils.h"
+#include "ds/ast/ast_node_stmt.h"
+#include "ds/ast/ast_node_var.h"
+#include "ds/ast/ast_node_ret.h"
+#include "ds/ast/ast_node_expr.h"
+#include "ds/ast/ast_node_num.h"
+#include "ds/ast/ast_node_scope.h"
+#include "ds/ast/ast_node_un_expr.h"
+#include "ds/ast/ast_node_decl.h"
+#include "ds/ast/ast_node_asst.h"
+#include "ds/ast/ast_node_prog.h"
+#include "ds/ast/ast_node_call.h"
+#include "ds/ast/ast_node_func.h"
+#include "ds/ast/ast_node_cond.h"
+#include "ds/ast/ast_node_bin_expr.h"
+#include "ds/ast/ast_node_paren_expr.h"
+#include "ds/ast/ast_node_loop.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -151,7 +167,7 @@ static void ast_verifier_verify_un_expr(ast_node_un_expr *node_un_expr) {
     case AST_NODE_UN_EXPR_PAREN_EXPR: ast_verifier_verify_expr(ast_node_paren_expr_get_expr(ast_node_un_expr_get_paren_expr(node_un_expr))); break;
     case AST_NODE_UN_EXPR_CALL: ast_verifier_verify_call(ast_node_un_expr_get_call(node_un_expr)); break;
 
-    default: UNREACHABLE;
+    default: UNREACHABLE();
     }
 }
 
@@ -165,7 +181,7 @@ static void ast_verifier_verify_expr(ast_node_expr *node_expr) {
     case AST_NODE_EXPR_UN_EXPR: ast_verifier_verify_un_expr(ast_node_expr_get_un_expr(node_expr)); break;
     case AST_NODE_EXPR_BIN_EXPR: ast_verifier_verify_bin_expr(ast_node_expr_get_bin_expr(node_expr)); break;
 
-    default: UNREACHABLE;
+    default: UNREACHABLE();
     }
 }
 
@@ -200,7 +216,7 @@ static void ast_verifier_verify_stmt(ast_node_stmt *node_stmt) {
     case AST_NODE_STMT_LOOP: ast_verifier_verify_loop(ast_node_stmt_get_loop(node_stmt)); break;
     case AST_NODE_STMT_RET: ast_verifier_verify_expr(ast_node_ret_get_expr(ast_node_stmt_get_ret(node_stmt))); break;
 
-    default: UNREACHABLE;
+    default: UNREACHABLE();
     }
 }
 

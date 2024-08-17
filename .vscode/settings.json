@@ -3,6 +3,8 @@
         "stddef.h": "c",
         "input_output.h": "c",
         "cstdlib": "c",
-        "slc.h": "c"
+        "slc.h": "c",
+        "token.h": "c",
+        "ast_node_expr.h": "c"
     }
 }
