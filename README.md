@@ -39,7 +39,7 @@ $ make -j -B -C slc/
 ```console
 $ <path_to_slc> <source_filename> <output_filename>
 ```
-When you first build `slc`, it will be located in `./slc/exec/`\
+When you first build `slc`, it will be located in `./slc/bin/`\
 Output file is an assembly file
 
 ## Future Plans
