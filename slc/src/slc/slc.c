@@ -1,7 +1,7 @@
 #include "slc/slc.h"
 #include "ui/ui.h"
 #include "memory/arena_allocator.h"
-#include "modules/assembly_generator.h"
+#include "modules/assembly_generator/ast_nodes/prog.h"
 #include "modules/ast_verifier/ast_nodes/prog.h"
 #include "modules/input_output.h"
 #include "modules/lexer.h"
@@ -24,7 +24,7 @@ void slc_compile(char *compiler_executable_name, char *source_file_name, char *o
     list *token_list = lexer_lex(source_code);
     ast_node_prog *node_prog = parser_parse_prog(token_list);
     ast_verifier_verify_prog(node_prog);
-    string *assembly = ass_gen_generate_prog(node_prog);
+    string *assembly = assembly_generator_generate_prog(node_prog);
     io_write_string_into_file(assembly, output_file_name);
 }
 

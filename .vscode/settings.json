@@ -9,6 +9,7 @@
         "loop.h": "c",
         "func.h": "c",
         "expr.h": "c",
-        "ast_verifier.h": "c"
+        "ast_verifier.h": "c",
+        "prog.h": "c"
     }
 }
