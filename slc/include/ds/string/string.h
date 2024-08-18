@@ -1,5 +1,5 @@
-#ifndef SLC_STRING_H
-#define SLC_STRING_H
+#ifndef SLC_DS_STRING_STRING_H
+#define SLC_DS_STRING_STRING_H
 
 #include "ds/string/string_view.h"
 #include <stdio.h>
@@ -15,4 +15,4 @@ void string_concat(string *dst, string *src);
 
 void string_write_into_file(string *string, FILE *file);
 
-#endif // SLC_STRING_H
+#endif // SLC_DS_STRING_STRING_H

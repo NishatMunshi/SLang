@@ -1,5 +1,5 @@
-#ifndef SLC_LIST_H
-#define SLC_LIST_H
+#ifndef SLC_DS_LIST_LIST_H
+#define SLC_DS_LIST_LIST_H
 
 #include "list_node.h"
 
@@ -25,4 +25,4 @@ size_t     list_get_size(list *list);
          LIST_FOR_EACH_NODE = list_node_get_next(LIST_FOR_EACH_NODE),   \
         item = list_node_get_data(LIST_FOR_EACH_NODE))
 
-#endif // SLC_LIST_H
+#endif // SLC_DS_LIST_LIST_H

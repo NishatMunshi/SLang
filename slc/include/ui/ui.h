@@ -1,5 +1,5 @@
-#ifndef SLC_UI_H
-#define SLC_UI_H
+#ifndef SLC_UI_UI_H
+#define SLC_UI_UI_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,4 +19,4 @@
     UI_INFO("USAGE", "%s <source_filename> <output_filename>\n", COMPILER_EXECUTABLE_NAME); \
 }
 
-#endif // SLC_UI_H
+#endif // SLC_UI_UI_H

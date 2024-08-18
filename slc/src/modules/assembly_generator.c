@@ -2,13 +2,13 @@
 #include "memory/arena_allocator.h"
 #include "ds/list/list.h"
 #include "utils/utils.h"
-#include "ds/ast/ast_node_num.h"
-#include "ds/ast/ast_node_var.h"
-#include "ds/ast/ast_node_expr.h"
-#include "ds/ast/ast_node_decl.h"
-#include "ds/ast/ast_node_asst.h"
-#include "ds/ast/ast_node_scope.h"
-#include "ds/ast/ast_node_func.h"
+#include "ds/ast/nodes/num.h"
+#include "ds/ast/nodes/var.h"
+#include "ds/ast/nodes/expr.h"
+#include "ds/ast/nodes/decl.h"
+#include "ds/ast/nodes/asst.h"
+#include "ds/ast/nodes/scope.h"
+#include "ds/ast/nodes/func.h"
 
 #include <stdio.h>
 #include <string.h>

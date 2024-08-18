@@ -5,7 +5,7 @@
 #include "modules/ast_verifier.h"
 #include "modules/input_output.h"
 #include "modules/lexer.h"
-#include "modules/parser.h"
+#include "modules/parser/prog.h"
 
 #include <stdlib.h>
 

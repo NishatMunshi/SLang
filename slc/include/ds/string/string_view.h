@@ -1,5 +1,5 @@
-#ifndef SLC_STRING_VIEW_H
-#define SLC_STRING_VIEW_H
+#ifndef SLC_DS_STRING_STRING_VIEW_H
+#define SLC_DS_STRING_STRING_VIEW_H
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -20,4 +20,4 @@ bool string_view_compare_with_ctr(string_view *string_view, char *cstr);
 
 void string_view_print(string_view *string_view);
 
-#endif // SLC_STRING_VIEW_H
+#endif // SLC_DS_STRING_STRING_VIEW_H

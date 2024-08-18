@@ -1,5 +1,5 @@
-#ifndef SLC_STACK_H
-#define SLC_STACK_H
+#ifndef SLC_DS_STACK_STACK_H
+#define SLC_DS_STACK_STACK_H
 
 #include <stddef.h>
 #include "stack_node.h"
@@ -23,4 +23,4 @@ stack_node* stack_get_top(stack* stack);
          STACK_FOR_EACH_NODE = stack_node_get_next(STACK_FOR_EACH_NODE),   \
         item = stack_node_get_data(STACK_FOR_EACH_NODE))
 
-#endif // SLC_STACK_H
+#endif // SLC_DS_STACK_STACK_H

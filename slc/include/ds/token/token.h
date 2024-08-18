@@ -1,5 +1,5 @@
-#ifndef SLC_TOKEN_H
-#define SLC_TOKEN_H
+#ifndef SLC_DS_TOKEN_TOKEN_H
+#define SLC_DS_TOKEN_TOKEN_H
 
 #include "ds/string/string_view.h"
 
@@ -45,4 +45,4 @@ char *       token_get_type_as_string(token_type type);
 void  token_print(token *token);
 void  token_print_pos(token *token);
 
-#endif // SLC_TOKEN_H
+#endif // SLC_DS_TOKEN_TOKEN_H
