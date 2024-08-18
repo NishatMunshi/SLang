@@ -3,8 +3,9 @@
 #include "memory/arena_allocator.h"
 #include "modules/assembly_generator/ast_nodes/prog.h"
 #include "modules/ast_verifier/ast_nodes/prog.h"
-#include "modules/input_output.h"
-#include "modules/lexer.h"
+#include "modules/file_handler/helpers/reader.h"
+#include "modules/file_handler/helpers/writer.h"
+#include "modules/lexer/lexer.h"
 #include "modules/parser/ast_nodes/prog.h"
 
 #include <stdlib.h>
@@ -20,12 +21,12 @@ void slc_compile(char *compiler_executable_name, char *source_file_name, char *o
     slc.source_file_name = source_file_name;
     slc.output_file_name = output_file_name;
     
-    string_view *source_code = io_read_file_into_string_view(source_file_name);
+    string_view *source_code = reader_read_file_into_string_view(source_file_name);
     list *token_list = lexer_lex(source_code);
     ast_node_prog *node_prog = parser_parse_prog(token_list);
     ast_verifier_verify_prog(node_prog);
     string *assembly = assembly_generator_generate_prog(node_prog);
-    io_write_string_into_file(assembly, output_file_name);
+    writer_write_string_into_file(assembly, output_file_name);
 }
 
 char *slc_get_source_file_name() {

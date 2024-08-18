@@ -10,6 +10,8 @@
         "func.h": "c",
         "expr.h": "c",
         "ast_verifier.h": "c",
-        "prog.h": "c"
+        "prog.h": "c",
+        "file_handler.h": "c",
+        "arena_allocator.h": "c"
     }
 }
