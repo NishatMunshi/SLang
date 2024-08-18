@@ -5,6 +5,10 @@
         "cstdlib": "c",
         "slc.h": "c",
         "token.h": "c",
-        "ast_node_expr.h": "c"
+        "ast_node_expr.h": "c",
+        "loop.h": "c",
+        "func.h": "c",
+        "expr.h": "c",
+        "ast_verifier.h": "c"
     }
 }

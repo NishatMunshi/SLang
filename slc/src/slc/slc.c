@@ -2,10 +2,10 @@
 #include "ui/ui.h"
 #include "memory/arena_allocator.h"
 #include "modules/assembly_generator.h"
-#include "modules/ast_verifier.h"
+#include "modules/ast_verifier/ast_nodes/prog.h"
 #include "modules/input_output.h"
 #include "modules/lexer.h"
-#include "modules/parser/prog.h"
+#include "modules/parser/ast_nodes/prog.h"
 
 #include <stdlib.h>
 
