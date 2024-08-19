@@ -23,7 +23,7 @@ void ast_verifier_verify_func(ast_verifier *ast_verifier, ast_node_func *node_fu
     ast_verifier_verify_func_name_is_new(ast_verifier, ast_node_func_get_name_token(node_func));
     ast_verifier_add_func(ast_verifier, node_func);
 
-    if (string_view_compare_with_ctr(token_get_name(ast_node_func_get_name_token(node_func)), "enter")) {
+    if (string_view_compare_with_cstr(token_get_name(ast_node_func_get_name_token(node_func)), "enter")) {
         ast_verifier_set_enter_exists(ast_verifier);
     }
 

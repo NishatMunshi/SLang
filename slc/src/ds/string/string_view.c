@@ -56,7 +56,7 @@ bool string_view_compare(string_view *string_view_1, string_view *string_view_2)
     return true;
 }
 
-bool string_view_compare_with_ctr(string_view *string_view, char *cstr){
+bool string_view_compare_with_cstr(string_view *string_view, char *cstr){
     if(string_view_get_length(string_view) != strlen(cstr)) {
         return false;
     }

@@ -16,7 +16,7 @@ size_t string_view_get_length(string_view *string_view);
 char   string_view_at(string_view *string_view, size_t index);
 
 bool string_view_compare(string_view *string_view_1, string_view *string_view_2);
-bool string_view_compare_with_ctr(string_view *string_view, char *cstr);
+bool string_view_compare_with_cstr(string_view *string_view, char *cstr);
 
 void string_view_print(string_view *string_view);
 

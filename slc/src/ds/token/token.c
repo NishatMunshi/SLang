@@ -31,15 +31,15 @@ string_view *token_get_name(token *token) {
 }
 
 token *token_create_from_word(string_view *word, size_t line, size_t col) {
-    if (string_view_compare_with_ctr(word, "var")) {
+    if (string_view_compare_with_cstr(word, "var")) {
         return token_create(TOKEN_VAR, word, line, col);
-    } else if (string_view_compare_with_ctr(word, "if")) {
+    } else if (string_view_compare_with_cstr(word, "if")) {
         return token_create(TOKEN_IF, word, line, col);
-    } else if (string_view_compare_with_ctr(word, "loop")) {
+    } else if (string_view_compare_with_cstr(word, "loop")) {
         return token_create(TOKEN_LOOP, word, line, col);
-    } else if (string_view_compare_with_ctr(word, "func")) {
+    } else if (string_view_compare_with_cstr(word, "func")) {
         return token_create(TOKEN_FUNC, word, line, col);
-    }else if (string_view_compare_with_ctr(word, "ret")) {
+    }else if (string_view_compare_with_cstr(word, "ret")) {
         return token_create(TOKEN_RET, word, line, col);
     } else {
         return token_create(TOKEN_IDENT, word, line, col);
