@@ -22,7 +22,7 @@ TARGET = $(BIN_DIR)/slc
 # compiler info
 CXX           = gcc
 CXX_STD       = c17
-CXX_FLAGS     = -Wall -Wextra -Wpedantic -std=$(CXX_STD)
+CXX_FLAGS     = -Wall -Wextra -Wpedantic -Werror -std=$(CXX_STD)
 INCLUDE_PATHS = -I$(HDR_DIR)
 
 # linker stuff
