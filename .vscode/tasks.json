@@ -4,7 +4,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "make -B -C slc debug && mkdir -p example/ass",
+            "command": "make -B -C slc clean debug && mkdir -p example/ass",
         },
         {
             "label": "clean",
