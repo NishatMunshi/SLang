@@ -6,7 +6,7 @@
             "configurationProvider": "ms-vscode.makefile-tools",
             "intelliSenseMode": "linux-gcc-x64",
             "cStandard": "c17",
-            "includePath": ["./slc/include/", "/usr/include/linux"]
+            "includePath": ["./slc/include/", "/usr/include/"]
         }
     ],
     "version": 4

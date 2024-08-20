@@ -13,6 +13,7 @@
         "prog.h": "c",
         "file_handler.h": "c",
         "arena_allocator.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "list.h": "c"
     }
 }
