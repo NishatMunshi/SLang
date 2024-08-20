@@ -1,4 +1,5 @@
 #include "ds/ast/nodes/scope.h"
+
 #include "memory/arena_allocator.h"
 
 struct ast_node_scope_struct {

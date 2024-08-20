@@ -1,4 +1,5 @@
 #include "modules/assembly_generator/ast_nodes/decl.h"
+
 #include "modules/assembly_generator/ast_nodes/expr.h"
 
 string *assembly_generator_generate_decl(ast_node_decl *node_decl) {

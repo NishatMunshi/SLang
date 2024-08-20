@@ -1,4 +1,5 @@
 #include "modules/ast_verifier/ast_nodes/scope.h"
+
 #include "modules/ast_verifier/ast_nodes/stmt.h"
 
 void ast_verifier_verify_scope(ast_verifier *ast_verifier, ast_node_scope *node_scope) {

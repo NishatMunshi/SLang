@@ -1,4 +1,5 @@
 #include "ds/ast/nodes/num.h"
+
 #include "memory/arena_allocator.h"
 
 struct ast_node_num_struct {

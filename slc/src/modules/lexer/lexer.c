@@ -1,14 +1,15 @@
 #include "modules/lexer/lexer.h"
-#include "memory/arena_allocator.h"
-#include "ds/list/list.h"
-#include "ds/token/token.h"
-#include "modules/lexer/tokens/word.h"
-#include "modules/lexer/tokens/num.h"
-#include "modules/lexer/tokens/operator.h"
-#include "modules/lexer/tokens/unidentified.h"
 
 #include <ctype.h>
 #include <stdio.h>
+
+#include "ds/list/list.h"
+#include "ds/token/token.h"
+#include "memory/arena_allocator.h"
+#include "modules/lexer/tokens/num.h"
+#include "modules/lexer/tokens/operator.h"
+#include "modules/lexer/tokens/unidentified.h"
+#include "modules/lexer/tokens/word.h"
 
 struct lexer_struct {
     string_view *source_code;
@@ -97,4 +98,3 @@ list *lexer_lex(string_view *source_code) {
 
     return token_list;
 }
-

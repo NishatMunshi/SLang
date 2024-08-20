@@ -1,4 +1,5 @@
 #include "ds/ast/nodes/prog.h"
+
 #include "memory/arena_allocator.h"
 
 struct ast_node_prog_struct {

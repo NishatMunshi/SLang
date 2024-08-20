@@ -9,9 +9,8 @@ ast_node_var *ast_node_var_create(token *var_name_token);
 
 void ast_node_var_set_offset(ast_node_var *node_var, long offset);
 
-string_view * ast_node_var_get_name(ast_node_var *node_var);
-long          ast_node_var_get_offset(ast_node_var *node_var);
-token *       ast_node_var_get_token(ast_node_var *node_var);
+string_view *ast_node_var_get_name(ast_node_var *node_var);
+long ast_node_var_get_offset(ast_node_var *node_var);
+token *ast_node_var_get_token(ast_node_var *node_var);
 
-
-#endif // SLC_DS_AST_NODES_VAR_H
+#endif  // SLC_DS_AST_NODES_VAR_H

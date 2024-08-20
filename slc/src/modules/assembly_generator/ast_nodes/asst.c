@@ -1,4 +1,5 @@
 #include "modules/assembly_generator/ast_nodes/asst.h"
+
 #include "modules/assembly_generator/ast_nodes/expr.h"
 
 string *assembly_generator_generate_asst(ast_node_asst *node_asst) {

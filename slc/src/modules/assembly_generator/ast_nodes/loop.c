@@ -1,12 +1,14 @@
 #include "modules/assembly_generator/ast_nodes/loop.h"
-#include "modules/assembly_generator/ast_nodes/scope.h"
+
 #include "modules/assembly_generator/ast_nodes/expr.h"
+#include "modules/assembly_generator/ast_nodes/scope.h"
 
 string *assembly_generator_generate_loop(ast_node_loop *node_loop) {
     string *ass_loop_label = assembly_generator_generate_new_label();
     string *ass_expr = assembly_generator_generate_expr(ast_node_loop_get_expr(node_loop));
-    string *ass_test = string_create_from_cstr("    test rax, rax\n"
-                                               "    jz ");
+    string *ass_test = string_create_from_cstr(
+        "    test rax, rax\n"
+        "    jz ");
     string *ass_skip_label = assembly_generator_generate_new_label();
     string *ass_scope = assembly_generator_generate_scope(ast_node_loop_get_scope(node_loop));
     string *ass_jump = string_create_from_cstr("    jmp ");

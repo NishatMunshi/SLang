@@ -1,4 +1,5 @@
 #include "ds/ast/nodes/paren_expr.h"
+
 #include "memory/arena_allocator.h"
 
 struct ast_node_paren_expr_struct {

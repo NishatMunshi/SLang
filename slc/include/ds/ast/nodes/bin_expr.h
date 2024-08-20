@@ -16,7 +16,7 @@ ast_node_bin_expr *ast_node_bin_expr_create_sub(ast_node_expr *node_expr_left, a
 void ast_node_bin_expr_add_right(ast_node_bin_expr *node_bin_expr, ast_node_un_expr *node_expr_un_right);
 
 ast_node_bin_expr_type ast_node_bin_expr_get_type(ast_node_bin_expr *node_bin_expr);
-ast_node_expr *        ast_node_bin_expr_get_left(ast_node_bin_expr *node_bin_expr);
-ast_node_un_expr *     ast_node_bin_expr_get_right(ast_node_bin_expr *node_bin_expr);
+ast_node_expr *ast_node_bin_expr_get_left(ast_node_bin_expr *node_bin_expr);
+ast_node_un_expr *ast_node_bin_expr_get_right(ast_node_bin_expr *node_bin_expr);
 
-#endif // SLC_DS_AST_NODES_BIN_EXPR_H
+#endif  // SLC_DS_AST_NODES_BIN_EXPR_H

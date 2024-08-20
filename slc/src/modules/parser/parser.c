@@ -1,7 +1,8 @@
 #include "modules/parser/parser.h"
-#include "memory/arena_allocator.h"
 
 #include <stdio.h>
+
+#include "memory/arena_allocator.h"
 
 struct parser_struct {
     list *token_list;
@@ -33,11 +34,11 @@ void parser_advance(parser *parser) {
 }
 
 void parser_print_error(token *current_token, char *expected_thing) {
-    printf("[SLC]: [PARSER ERROR]: ");                      
-    token_print_pos(current_token);                                 
-    printf("Expected %s; Instead got: ", expected_thing);   
-    token_print(current_token);                                     
-    printf(" \n");                                          
+    printf("[SLC]: [PARSER ERROR]: ");
+    token_print_pos(current_token);
+    printf("Expected %s; Instead got: ", expected_thing);
+    token_print(current_token);
+    printf(" \n");
 }
 
 token *parser_seek_token(parser *parser, token_type type) {

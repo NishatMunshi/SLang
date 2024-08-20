@@ -1,4 +1,5 @@
 #include "modules/ast_verifier/ast_nodes/bin_expr.h"
+
 #include "modules/ast_verifier/ast_nodes/expr.h"
 #include "modules/ast_verifier/ast_nodes/un_expr.h"
 

@@ -1,7 +1,7 @@
 #include "modules/parser/ast_nodes/loop.h"
+
 #include "modules/parser/ast_nodes/expr.h"
 #include "modules/parser/ast_nodes/scope.h"
-
 
 ast_node_loop *parser_parse_loop(parser *parser) {
     parser_seek_token(parser, TOKEN_LOOP);

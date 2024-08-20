@@ -1,10 +1,10 @@
 #ifndef SLC_DS_AST_NODES_UN_EXPR_H
 #define SLC_DS_AST_NODES_UN_EXPR_H
 
-#include "ds/ast/nodes/num.h"
-#include "ds/ast/nodes/var.h"
-#include "ds/ast/nodes/paren_expr.h"
 #include "ds/ast/nodes/call.h"
+#include "ds/ast/nodes/num.h"
+#include "ds/ast/nodes/paren_expr.h"
+#include "ds/ast/nodes/var.h"
 
 typedef struct ast_node_un_expr_struct ast_node_un_expr;
 typedef struct ast_node_paren_expr_struct ast_node_paren_expr;
@@ -23,9 +23,9 @@ ast_node_un_expr *ast_node_un_expr_create_paren_expr(ast_node_paren_expr *node_p
 ast_node_un_expr *ast_node_un_expr_create_call(ast_node_call *node_call);
 
 ast_node_un_expr_type ast_node_un_expr_get_type(ast_node_un_expr *node_un_expr);
-ast_node_num *        ast_node_un_expr_get_num(ast_node_un_expr *node_un_expr);
-ast_node_var *        ast_node_un_expr_get_var(ast_node_un_expr *node_un_expr);
-ast_node_paren_expr * ast_node_un_expr_get_paren_expr(ast_node_un_expr *node_un_expr);
-ast_node_call *       ast_node_un_expr_get_call(ast_node_un_expr *node_un_expr);
+ast_node_num *ast_node_un_expr_get_num(ast_node_un_expr *node_un_expr);
+ast_node_var *ast_node_un_expr_get_var(ast_node_un_expr *node_un_expr);
+ast_node_paren_expr *ast_node_un_expr_get_paren_expr(ast_node_un_expr *node_un_expr);
+ast_node_call *ast_node_un_expr_get_call(ast_node_un_expr *node_un_expr);
 
-#endif // SLC_DS_AST_NODES_UN_EXPR_H
+#endif  // SLC_DS_AST_NODES_UN_EXPR_H

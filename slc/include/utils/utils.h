@@ -9,4 +9,4 @@ size_t utils_absl(long num);
 
 #define UNREACHABLE() assert(false && "UNREACHABLE()")
 
-#endif // SLC_UTILS_UTILS_H
+#endif  // SLC_UTILS_UTILS_H

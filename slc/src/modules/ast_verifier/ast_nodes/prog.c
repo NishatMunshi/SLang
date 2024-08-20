@@ -1,6 +1,7 @@
-#include "modules/ast_verifier/ast_verifier.h"
 #include "modules/ast_verifier/ast_nodes/prog.h"
+
 #include "modules/ast_verifier/ast_nodes/func.h"
+#include "modules/ast_verifier/ast_verifier.h"
 
 static void ast_verifier_verify_enter_exists(ast_verifier *ast_verifier) {
     if (!ast_verifier_enter_exists(ast_verifier)) {

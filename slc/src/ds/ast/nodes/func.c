@@ -1,4 +1,5 @@
 #include "ds/ast/nodes/func.h"
+
 #include "memory/arena_allocator.h"
 
 struct ast_node_func_struct {
@@ -17,13 +18,13 @@ ast_node_func *ast_node_func_create(token *name, list *params, ast_node_scope *n
 }
 
 token *ast_node_func_get_name_token(ast_node_func *node_func) {
-    return node_func->name; 
+    return node_func->name;
 }
 
 list *ast_node_func_get_params(ast_node_func *node_func) {
-    return node_func->params; 
+    return node_func->params;
 }
 
-ast_node_scope *ast_node_func_get_scope(ast_node_func *node_func) { 
-    return node_func->scope; 
+ast_node_scope *ast_node_func_get_scope(ast_node_func *node_func) {
+    return node_func->scope;
 }

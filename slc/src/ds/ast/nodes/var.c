@@ -1,9 +1,10 @@
 #include "ds/ast/nodes/var.h"
+
 #include "memory/arena_allocator.h"
 
 struct ast_node_var_struct {
     token *var_name_token;
-    long offset; // wrt rbp
+    long offset;  // wrt rbp
 };
 
 ast_node_var *ast_node_var_create(token *var_name_token) {

@@ -1,7 +1,7 @@
 #ifndef SLC_SLC_H
 #define SLC_SLC_H
 
-void  slc_compile(char *compiler_executable_name, char *source_file_name, char *output_file_name);
+void slc_compile(char *compiler_executable_name, char *source_file_name, char *output_file_name);
 char *slc_get_source_file_name();
 
-#endif // SLC_SLC_H
+#endif  // SLC_SLC_H

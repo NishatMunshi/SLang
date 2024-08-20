@@ -1,8 +1,9 @@
 #include "memory/arena_allocator.h"
-#include "ui/ui.h"
 
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "ui/ui.h"
 
 #define ARENA_ALLOCATOR_CARACITY_IN_BYTES (1024ul * 1024ul)
 
@@ -21,8 +22,8 @@ static void arena_allocator_init() {
     arena_allocator.next_free_spot = 0;
 }
 
-void *arena_allocator_allocate(size_t num_of_bytes){
-    if(!arena_allocator.begin) {
+void *arena_allocator_allocate(size_t num_of_bytes) {
+    if (!arena_allocator.begin) {
         arena_allocator_init();
     }
     if (arena_allocator.next_free_spot + num_of_bytes > ARENA_ALLOCATOR_CARACITY_IN_BYTES) {

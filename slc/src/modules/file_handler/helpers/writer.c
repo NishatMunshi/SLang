@@ -1,4 +1,5 @@
 #include "modules/file_handler/helpers/writer.h"
+
 #include "modules/file_handler/file_handler.h"
 
 void writer_write_string_into_file(string *string, char *file_name) {

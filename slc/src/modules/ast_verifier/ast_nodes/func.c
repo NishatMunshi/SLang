@@ -1,4 +1,5 @@
 #include "modules/ast_verifier/ast_nodes/func.h"
+
 #include "modules/ast_verifier/ast_nodes/scope.h"
 
 static void ast_verifier_verify_func_name_is_new(ast_verifier *ast_verifier, token *func_name_token) {

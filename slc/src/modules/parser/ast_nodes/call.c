@@ -1,4 +1,5 @@
 #include "modules/parser/ast_nodes/call.h"
+
 #include "modules/parser/ast_nodes/expr.h"
 
 static list *parser_parse_call_args(parser *parser) {

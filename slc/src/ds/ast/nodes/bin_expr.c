@@ -1,4 +1,5 @@
 #include "ds/ast/nodes/bin_expr.h"
+
 #include "memory/arena_allocator.h"
 
 struct ast_node_bin_expr_struct {

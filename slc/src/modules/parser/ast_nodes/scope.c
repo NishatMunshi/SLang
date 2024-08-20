@@ -1,4 +1,5 @@
 #include "modules/parser/ast_nodes/scope.h"
+
 #include "modules/parser/ast_nodes/stmt.h"
 
 ast_node_scope *parser_parse_scope(parser *parser) {

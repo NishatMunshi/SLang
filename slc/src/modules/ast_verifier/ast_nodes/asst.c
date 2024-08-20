@@ -1,4 +1,5 @@
 #include "modules/ast_verifier/ast_nodes/asst.h"
+
 #include "modules/ast_verifier/ast_nodes/expr.h"
 
 void ast_verifier_verify_asst(ast_verifier *ast_verifier, ast_node_asst *node_asst) {

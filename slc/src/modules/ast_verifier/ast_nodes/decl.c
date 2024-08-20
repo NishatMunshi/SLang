@@ -1,4 +1,5 @@
 #include "modules/ast_verifier/ast_nodes/decl.h"
+
 #include "modules/ast_verifier/ast_nodes/expr.h"
 
 static long ast_verifier_calc_new_var_offset(ast_verifier *ast_verifier) {

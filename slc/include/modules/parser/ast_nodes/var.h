@@ -6,4 +6,4 @@
 
 ast_node_var *parser_parse_var(parser *parser);
 
-#endif // SLC_MODULES_PARSER_AST_NODES_VAR_H
+#endif  // SLC_MODULES_PARSER_AST_NODES_VAR_H

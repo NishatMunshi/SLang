@@ -5,5 +5,4 @@
 
 ast_node_prog *parser_parse_prog(list *token_list);
 
-#endif // SLC_MODULES_PARSER_AST_NODES_PROG_H
-
+#endif  // SLC_MODULES_PARSER_AST_NODES_PROG_H

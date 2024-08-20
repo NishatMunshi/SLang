@@ -5,4 +5,4 @@
 
 string_view *reader_read_file_into_string_view(char *file_name);
 
-#endif // SLC_MODULES_FILE_HANDLER_HELPERS_READER_H
+#endif  // SLC_MODULES_FILE_HANDLER_HELPERS_READER_H

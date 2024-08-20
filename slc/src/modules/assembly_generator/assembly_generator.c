@@ -1,8 +1,9 @@
 #include "modules/assembly_generator/assembly_generator.h"
-#include "memory/arena_allocator.h"
-#include "utils/utils.h"
 
 #include <string.h>
+
+#include "memory/arena_allocator.h"
+#include "utils/utils.h"
 
 string *assembly_generator_generate_new_label() {
     static size_t label = 0;

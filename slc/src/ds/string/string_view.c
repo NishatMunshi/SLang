@@ -1,9 +1,10 @@
 #include "ds/string/string_view.h"
-#include "memory/arena_allocator.h"
 
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
+
+#include "memory/arena_allocator.h"
 
 struct string_view_struct {
     char *beg;
@@ -56,8 +57,8 @@ bool string_view_compare(string_view *string_view_1, string_view *string_view_2)
     return true;
 }
 
-bool string_view_compare_with_cstr(string_view *string_view, char *cstr){
-    if(string_view_get_length(string_view) != strlen(cstr)) {
+bool string_view_compare_with_cstr(string_view *string_view, char *cstr) {
+    if (string_view_get_length(string_view) != strlen(cstr)) {
         return false;
     }
     for (size_t i = 0; string_view_in_bound(string_view, i); ++i) {

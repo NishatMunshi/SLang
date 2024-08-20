@@ -1,9 +1,10 @@
 #include "utils/utils.h"
-#include "memory/arena_allocator.h"
 
 #include <stddef.h>
 #include <stdio.h>
 #include <string.h>
+
+#include "memory/arena_allocator.h"
 
 size_t utils_count_digits_in_num(size_t num) {
     size_t i = 0;
@@ -14,6 +15,6 @@ size_t utils_count_digits_in_num(size_t num) {
     return i;
 }
 
-size_t utils_absl(long num) { 
+size_t utils_absl(long num) {
     return num >= 0 ? (size_t)num : (size_t)(-num);
 }

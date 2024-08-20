@@ -3,4 +3,4 @@
 
 int main(int argc, char **argv);
 
-#endif // SLC_MAIN_H
+#endif  // SLC_MAIN_H

@@ -1,4 +1,5 @@
 #include "modules/assembly_generator/ast_nodes/scope.h"
+
 #include "modules/assembly_generator/ast_nodes/stmt.h"
 
 string *assembly_generator_generate_scope(ast_node_scope *node_scope) {

@@ -1,8 +1,9 @@
 #include "ds/list/list.h"
-#include "memory/arena_allocator.h"
 
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "memory/arena_allocator.h"
 
 struct list_struct {
     list_node *begin;

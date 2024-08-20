@@ -7,4 +7,3 @@ FILE *file_handler_open_file(char *file_name, char *mode) {
     }
     return file;
 }
-

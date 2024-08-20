@@ -1,6 +1,7 @@
 #include "modules/file_handler/helpers/reader.h"
-#include "modules/file_handler/file_handler.h"
+
 #include "memory/arena_allocator.h"
+#include "modules/file_handler/file_handler.h"
 
 static size_t reader_get_file_size(FILE *file) {
     fseek(file, 0L, SEEK_END);

@@ -1,6 +1,7 @@
 #include "modules/parser/ast_nodes/asst.h"
-#include "modules/parser/ast_nodes/var.h"
+
 #include "modules/parser/ast_nodes/expr.h"
+#include "modules/parser/ast_nodes/var.h"
 
 ast_node_asst *parser_parse_asst(parser *parser) {
     ast_node_var *node_var = parser_parse_var(parser);

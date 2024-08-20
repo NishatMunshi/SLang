@@ -1,6 +1,7 @@
 #include "main.h"
-#include "ui/ui.h"
+
 #include "slc/slc.h"
+#include "ui/ui.h"
 
 int main(int argc, char **argv) {
     if (argc < 2) {

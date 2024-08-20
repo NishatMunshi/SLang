@@ -6,4 +6,4 @@
 
 string *assembly_generator_generate_loop(ast_node_loop *node_loop);
 
-#endif // SLC_MODULES_ASSEMBLY_GENERATOR_AST_NODES_LOOP_H
+#endif  // SLC_MODULES_ASSEMBLY_GENERATOR_AST_NODES_LOOP_H

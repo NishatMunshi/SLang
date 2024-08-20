@@ -1,6 +1,7 @@
 #include "modules/parser/ast_nodes/func.h"
-#include "modules/parser/ast_nodes/var.h"
+
 #include "modules/parser/ast_nodes/scope.h"
+#include "modules/parser/ast_nodes/var.h"
 
 static list *parser_parse_func_params(parser *parser) {
     parser_seek_token(parser, TOKEN_LPAREN);

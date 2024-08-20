@@ -1,6 +1,7 @@
 #include "modules/parser/ast_nodes/prog.h"
-#include "modules/parser/ast_nodes/paren_expr.h"
+
 #include "modules/parser/ast_nodes/func.h"
+#include "modules/parser/ast_nodes/paren_expr.h"
 
 ast_node_prog *parser_parse_prog(list *token_list) {
     parser *parser = parser_create(token_list);

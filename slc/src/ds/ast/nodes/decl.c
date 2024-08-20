@@ -1,4 +1,5 @@
 #include "ds/ast/nodes/decl.h"
+
 #include "memory/arena_allocator.h"
 
 struct ast_node_decl_struct {

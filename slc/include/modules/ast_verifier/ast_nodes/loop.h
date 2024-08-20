@@ -5,4 +5,4 @@
 
 #define ast_verifier_verify_loop ast_verifier_verify_cond
 
-#endif // SLC_MODULES_AST_VERIFIER_AST_NODES_LOOP_H
+#endif  // SLC_MODULES_AST_VERIFIER_AST_NODES_LOOP_H

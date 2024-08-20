@@ -1,8 +1,9 @@
 #include "ds/string/string.h"
-#include "memory/arena_allocator.h"
-#include "utils/utils.h"
 
 #include <stdio.h>
+
+#include "memory/arena_allocator.h"
+#include "utils/utils.h"
 
 struct string_struct {
     string_view *string_view;
@@ -22,7 +23,7 @@ string *string_create_from_string_view(string_view *string_view) {
 
 string *string_create_from_num(long num) {
     char *template = "%li";
-    char *cstr = arena_allocator_allocate(utils_count_digits_in_num(utils_absl(num)) + 2); // 1 char for a '-' sign, 1 char for the null char
+    char *cstr = arena_allocator_allocate(utils_count_digits_in_num(utils_absl(num)) + 2);  // 1 char for a '-' sign, 1 char for the null char
     sprintf(cstr, template, num);
     return string_create_from_cstr(cstr);
 }

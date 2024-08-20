@@ -1,6 +1,7 @@
 #include "modules/ast_verifier/ast_nodes/call.h"
-#include "modules/ast_verifier/ast_nodes/expr.h"
+
 #include "ds/ast/nodes/func.h"
+#include "modules/ast_verifier/ast_nodes/expr.h"
 
 static ast_node_func *ast_verifier_verify_func_exists(ast_verifier *ast_verifier, token *func_name_token) {
     ast_node_func *node_func = ast_verifier_funcs_list_contains_func(ast_verifier, token_get_name(func_name_token));

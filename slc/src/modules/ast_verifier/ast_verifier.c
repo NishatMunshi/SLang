@@ -1,4 +1,5 @@
 #include "modules/ast_verifier/ast_verifier.h"
+
 #include "ds/stack/stack.h"
 #include "memory/arena_allocator.h"
 
@@ -59,7 +60,7 @@ void ast_verifier_enter_scope(ast_verifier *ast_verifier) {
 void ast_verifier_leave_scope(ast_verifier *ast_verifier) {
     size_t vars_stack_current_size = stack_get_size(ast_verifier->vars_stack);
     size_t items_to_pop = vars_stack_current_size - ast_verifier->var_stack_size_at_scope_entry;
-    for(size_t i = 0; i < items_to_pop; ++i) {
+    for (size_t i = 0; i < items_to_pop; ++i) {
         stack_pop(ast_verifier->vars_stack);
     }
 }
