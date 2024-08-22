@@ -1,3 +1,3 @@
 func enter : () := {
-    ret  2 > 3.
+    ret  1 < 2.
 }
