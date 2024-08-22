@@ -21,6 +21,8 @@ ast_node_expr *parser_parse_expr(parser *parser) {
         switch (token_get_type(current_token)) {
             case TOKEN_PLUS:
             case TOKEN_MINUS:
+            case TOKEN_LT:
+            case TOKEN_GT:
                 node_expr = ast_node_expr_create_bin_expr(parser_parse_bin_expr(parser, node_expr));
                 break;
 

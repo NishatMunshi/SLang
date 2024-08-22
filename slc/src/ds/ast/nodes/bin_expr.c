@@ -25,6 +25,14 @@ ast_node_bin_expr *ast_node_bin_expr_create_sub(ast_node_expr *node_expr_left, a
     return ast_node_bin_expr_create(AST_NODE_BIN_EXPR_SUB, node_expr_left, node_expr_un_right);
 }
 
+ast_node_bin_expr *ast_node_bin_expr_create_lt(ast_node_expr *node_expr_left, ast_node_un_expr *node_expr_un_right) {
+    return ast_node_bin_expr_create(AST_NODE_BIN_EXPR_LT, node_expr_left, node_expr_un_right);
+}
+
+ast_node_bin_expr *ast_node_bin_expr_create_gt(ast_node_expr *node_expr_left, ast_node_un_expr *node_expr_un_right) {
+    return ast_node_bin_expr_create(AST_NODE_BIN_EXPR_GT, node_expr_left, node_expr_un_right);
+}
+
 void ast_node_bin_expr_add_right(ast_node_bin_expr *node_bin_expr, ast_node_un_expr *node_expr_un_right) {
     node_bin_expr->node_un_expr_right = node_expr_un_right;
 }

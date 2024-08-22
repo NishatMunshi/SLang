@@ -13,6 +13,12 @@ ast_node_bin_expr *parser_parse_bin_expr(parser *parser, ast_node_expr *node_exp
         case TOKEN_MINUS:
             node_bin_expr = ast_node_bin_expr_create_sub(node_expr_left, NULL);
             break;
+        case TOKEN_LT:
+            node_bin_expr = ast_node_bin_expr_create_lt(node_expr_left, NULL);
+            break;
+        case TOKEN_GT:
+            node_bin_expr = ast_node_bin_expr_create_gt(node_expr_left, NULL);
+            break;
 
         default:
             PARSER_ERROR(current_token, "an operand");

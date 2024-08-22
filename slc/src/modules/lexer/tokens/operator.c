@@ -15,9 +15,13 @@ token *lexer_lex_operator(lexer *lexer) {
                 case '-':
                     return token_create(TOKEN_LARROW, string_view_create(char_ptr_begin + begin, 2), line, col);
                 default:
-                    break;
+                    return token_create(TOKEN_LT, string_view_create(char_ptr_begin + begin, 1), line, col);
             }
             break;
+
+        case '>':
+            return token_create(TOKEN_GT, string_view_create(char_ptr_begin + begin, 1), line, col);
+
 
         case ':':
             c = lexer_get_current_char(lexer);

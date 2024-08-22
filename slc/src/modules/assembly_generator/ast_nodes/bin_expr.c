@@ -19,6 +19,17 @@ string *assembly_generator_generate_bin_expr(ast_node_bin_expr *node_bin_expr) {
         case AST_NODE_BIN_EXPR_SUB:
             ass_instruction = string_create_from_cstr("    sub rax, rbx\n");
             break;
+        case AST_NODE_BIN_EXPR_LT:
+            ass_instruction = string_create_from_cstr(
+                "    sub rax, rbx\n"
+                "    shr rax, 63\n");
+            break;
+        case AST_NODE_BIN_EXPR_GT:
+            ass_instruction = string_create_from_cstr(
+                "    sub rbx, rax\n"
+                "    mov rax, rbx\n"
+                "    shr rax, 63\n");
+            break;
 
         default:
             UNREACHABLE();

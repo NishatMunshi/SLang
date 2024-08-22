@@ -29,6 +29,9 @@ typedef enum token_type_enum {
 
     TOKEN_RET,
 
+    TOKEN_LT,
+    TOKEN_GT,
+
     TOKEN_UNIDENTIFIED,
     TOKEN_EOF
 } token_type;

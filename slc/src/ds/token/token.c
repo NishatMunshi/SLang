@@ -103,6 +103,11 @@ char *token_get_type_as_string(token_type type) {
         case TOKEN_RET:
             return "<TOKEN_RET>";
             break;
+            case TOKEN_LT:
+            return "<TOKEN_LT>";
+            break;case TOKEN_GT:
+            return "<TOKEN_GT>";
+            break;
         case TOKEN_UNIDENTIFIED:
             return "<TOKEN_UNIDENTIFIED>";
             break;
