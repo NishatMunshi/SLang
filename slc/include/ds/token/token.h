@@ -32,6 +32,10 @@ typedef enum token_type_enum {
     TOKEN_LT,
     TOKEN_GT,
 
+    TOKEN_AND,
+    TOKEN_OR,
+    TOKEN_XOR,
+
     TOKEN_UNIDENTIFIED,
     TOKEN_EOF
 } token_type;

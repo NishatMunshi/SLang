@@ -32,6 +32,15 @@ string *assembly_generator_generate_bin_expr(ast_node_bin_expr *node_bin_expr) {
                 "    mov rbx, 0x8000000000000000\n"
                 "    and rax, rbx\n");
             break;
+        case AST_NODE_BIN_EXPR_AND:
+            ass_instruction = string_create_from_cstr("    and rax, rbx\n");
+            break;
+        case AST_NODE_BIN_EXPR_OR:
+            ass_instruction = string_create_from_cstr("    or rax, rbx\n");
+            break;
+        case AST_NODE_BIN_EXPR_XOR:
+            ass_instruction = string_create_from_cstr("    xor rax, rbx\n");
+            break;
 
         default:
             UNREACHABLE();

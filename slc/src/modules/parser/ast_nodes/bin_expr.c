@@ -1,6 +1,7 @@
 #include "modules/parser/ast_nodes/bin_expr.h"
 
 #include "modules/parser/ast_nodes/un_expr.h"
+#include <stdio.h>
 
 ast_node_bin_expr *parser_parse_bin_expr(parser *parser, ast_node_expr *node_expr_left) {
     ast_node_bin_expr *node_bin_expr = NULL;
@@ -18,6 +19,15 @@ ast_node_bin_expr *parser_parse_bin_expr(parser *parser, ast_node_expr *node_exp
             break;
         case TOKEN_GT:
             node_bin_expr = ast_node_bin_expr_create_gt(node_expr_left, NULL);
+            break;
+        case TOKEN_AND:
+            node_bin_expr = ast_node_bin_expr_create_and(node_expr_left, NULL);
+            break;
+        case TOKEN_OR:
+            node_bin_expr = ast_node_bin_expr_create_or(node_expr_left, NULL);
+            break;
+        case TOKEN_XOR:
+            node_bin_expr = ast_node_bin_expr_create_xor(node_expr_left, NULL);
             break;
 
         default:
