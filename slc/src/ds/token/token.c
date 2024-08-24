@@ -42,12 +42,12 @@ token *token_create_from_word(string_view *word, size_t line, size_t col) {
         return token_create(TOKEN_FUNC, word, line, col);
     } else if (string_view_compare_with_cstr(word, "ret")) {
         return token_create(TOKEN_RET, word, line, col);
-    } else if (string_view_compare_with_cstr(word, "and")) {
-        return token_create(TOKEN_AND, word, line, col);
-    } else if (string_view_compare_with_cstr(word, "or")) {
-        return token_create(TOKEN_OR, word, line, col);
-    } else if (string_view_compare_with_cstr(word, "xor")) {
-        return token_create(TOKEN_XOR, word, line, col);
+    } else if (string_view_compare_with_cstr(word, "bitand")) {
+        return token_create(TOKEN_BITAND, word, line, col);
+    } else if (string_view_compare_with_cstr(word, "bitor")) {
+        return token_create(TOKEN_BITOR, word, line, col);
+    } else if (string_view_compare_with_cstr(word, "bitxor")) {
+        return token_create(TOKEN_BITXOR, word, line, col);
     } else {
         return token_create(TOKEN_IDENT, word, line, col);
     }
@@ -115,14 +115,14 @@ char *token_get_type_as_string(token_type type) {
         case TOKEN_GT:
             return "<TOKEN_GT>";
             break;
-        case TOKEN_AND:
-            return "<TOKEN_AND>";
+        case TOKEN_BITAND:
+            return "<TOKEN_BITAND>";
             break;
-        case TOKEN_OR:
-            return "<TOKEN_OR>";
+        case TOKEN_BITOR:
+            return "<TOKEN_BITOR>";
             break;
-        case TOKEN_XOR:
-            return "<TOKEN_XOR>";
+        case TOKEN_BITXOR:
+            return "<TOKEN_BITXOR>";
             break;
         case TOKEN_UNIDENTIFIED:
             return "<TOKEN_UNIDENTIFIED>";

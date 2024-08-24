@@ -23,9 +23,9 @@ ast_node_expr *parser_parse_expr(parser *parser) {
             case TOKEN_MINUS:
             case TOKEN_LT:
             case TOKEN_GT:
-            case TOKEN_AND:
-            case TOKEN_OR:
-            case TOKEN_XOR:
+            case TOKEN_BITAND:
+            case TOKEN_BITOR:
+            case TOKEN_BITXOR:
                 node_expr = ast_node_expr_create_bin_expr(parser_parse_bin_expr(parser, node_expr));
                 break;
 

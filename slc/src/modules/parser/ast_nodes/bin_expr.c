@@ -20,13 +20,13 @@ ast_node_bin_expr *parser_parse_bin_expr(parser *parser, ast_node_expr *node_exp
         case TOKEN_GT:
             node_bin_expr = ast_node_bin_expr_create_gt(node_expr_left, NULL);
             break;
-        case TOKEN_AND:
+        case TOKEN_BITAND:
             node_bin_expr = ast_node_bin_expr_create_and(node_expr_left, NULL);
             break;
-        case TOKEN_OR:
+        case TOKEN_BITOR:
             node_bin_expr = ast_node_bin_expr_create_or(node_expr_left, NULL);
             break;
-        case TOKEN_XOR:
+        case TOKEN_BITXOR:
             node_bin_expr = ast_node_bin_expr_create_xor(node_expr_left, NULL);
             break;
 
