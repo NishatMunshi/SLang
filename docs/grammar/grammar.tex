@@ -4,8 +4,7 @@
 \date{July 2024}
 
 \usepackage{amsmath}
-\usepackage[left=2cm, right=2cm, top=0cm, bottom=2cm]{geometry}
-
+\usepackage[left=2cm, right=2cm, top=1cm, bottom=2cm]{geometry}
 \begin{document}
 \maketitle
 
@@ -100,6 +99,8 @@
     :\hspace{\spacefromdefn}
     $<expr> \hspace{3mm} <bin\_op> \hspace{3mm} <un\_expr>$
 
+\newpage
+\newgeometry{top=2cm}
     \item{\makebox[\boxwidth]{$\mathbf{<bin\_op>}$\hfill}}
     :\hspace{\spacefromdefn}
     \begin{math}
@@ -108,9 +109,9 @@
             <-> \\
             <<> \\
             <>> \\
-            <and> \\
-            <or> \\
-            <xor> \\
+            <bitand> \\
+            <bitor> \\
+            <bitxor> \\
         \end{cases}
     \end{math}
 \end{itemize}
