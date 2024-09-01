@@ -22,13 +22,14 @@ string *assembly_generator_generate_bin_expr(ast_node_bin_expr *node_bin_expr) {
         case AST_NODE_BIN_EXPR_LT:
             ass_instruction = string_create_from_cstr(
                 "    sub rax, rbx\n"
-                "    shr rax, 63\n");
+                "    rol rax, 1\n"
+                "    and rax, 1\n");
             break;
         case AST_NODE_BIN_EXPR_GT:
             ass_instruction = string_create_from_cstr(
                 "    sub rbx, rax\n"
-                "    mov rax, rbx\n"
-                "    shr rax, 63\n");
+                "    shld rax, rbx, 1\n"
+                "    and rax, 1\n");
             break;
         case AST_NODE_BIN_EXPR_BITAND:
             ass_instruction = string_create_from_cstr("    and rax, rbx\n");
