@@ -22,23 +22,21 @@ string *assembly_generator_generate_bin_expr(ast_node_bin_expr *node_bin_expr) {
         case AST_NODE_BIN_EXPR_LT:
             ass_instruction = string_create_from_cstr(
                 "    sub rax, rbx\n"
-                "    mov rbx, 0x8000000000000000\n"
-                "    and rax, rbx\n");
+                "    shr rax, 63\n");
             break;
         case AST_NODE_BIN_EXPR_GT:
             ass_instruction = string_create_from_cstr(
                 "    sub rbx, rax\n"
                 "    mov rax, rbx\n"
-                "    mov rbx, 0x8000000000000000\n"
-                "    and rax, rbx\n");
+                "    shr rax, 63\n");
             break;
-        case AST_NODE_BIN_EXPR_AND:
+        case AST_NODE_BIN_EXPR_BITAND:
             ass_instruction = string_create_from_cstr("    and rax, rbx\n");
             break;
-        case AST_NODE_BIN_EXPR_OR:
+        case AST_NODE_BIN_EXPR_BITOR:
             ass_instruction = string_create_from_cstr("    or rax, rbx\n");
             break;
-        case AST_NODE_BIN_EXPR_XOR:
+        case AST_NODE_BIN_EXPR_BITXOR:
             ass_instruction = string_create_from_cstr("    xor rax, rbx\n");
             break;
 

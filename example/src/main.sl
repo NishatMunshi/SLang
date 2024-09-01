@@ -1,3 +1,3 @@
 func enter : () := {
-    ret  1 bitor 2.
+    ret  100 > 20.
 }
